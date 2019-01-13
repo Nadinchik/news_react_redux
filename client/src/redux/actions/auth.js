@@ -1,4 +1,4 @@
-export function login(data) {
+export function auth(data) {
     return dispatch => {
         return fetch('/api/auth',{
             method: 'POST'

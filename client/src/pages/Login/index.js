@@ -2,7 +2,7 @@ import React,  { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { login } from "../../redux/actions/login";
+import { auth } from "../../redux/actions/auth";
 
 class Login extends Component {
     constructor(props) {
@@ -14,9 +14,8 @@ class Login extends Component {
         };
     }
 
-    handleChange = (event) =>{
-        const [name, value] = event.target;
-        this.setState({[name]: value});
+    handleChange = (input, value) =>{
+        this.setState({ [input]: value });
     };
 
     handleSubmit = (event) =>{
@@ -45,7 +44,7 @@ class Login extends Component {
                                     className="form-control username"
                                     id="formGroupExampleInput"
                                     value={identifier}
-                                    onChange={this.handleChange}
+                                    onChange={this.handleChange(identifier)}
                                     placeholder="Username/email"
                                 />
                             </div>
@@ -57,7 +56,7 @@ class Login extends Component {
                                     className="form-control password"
                                     id="formGroupExampleInput2"
                                     value={password}
-                                    onChange={this.handleChange}
+                                    onChange={this.handleChange(password)}
                                     placeholder="Password"
                                 />
                             </div>
@@ -79,4 +78,4 @@ class Login extends Component {
 }
 
 
-export default connect(null, {login})(Login);
+export default connect(null, {login: auth})(Login);
