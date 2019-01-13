@@ -5,7 +5,7 @@ class SearchInput extends Component {
         super(props);
     }
 
-    onInputChange(term) {
+    handleChange(term) {
         this.props.onSearchTermChange(term);
     }
 
@@ -15,7 +15,7 @@ class SearchInput extends Component {
                 <input className="form-control"
                        type="text"
                        placeholder="Search..."
-                       onChange={ event => this.onInputChange(event.target.value)} />
+                       onChange={ event => this.handleChange(event.target.value)} />
             </div>
         )
     }

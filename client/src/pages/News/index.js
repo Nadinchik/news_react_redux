@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux"
 
 import SearchInput from '../../components/SearchInput'
-import { addNews } from "../../store/actions/news";
+import { addNews } from "../../redux/actions/news";
 
 class News extends Component {
     state = { title: ''};
