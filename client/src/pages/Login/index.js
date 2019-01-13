@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { auth } from "../../redux/actions/auth";
+import authorize from "../../redux/reducers/authReducer";
 
 class Login extends Component {
     constructor(props) {
@@ -18,9 +19,9 @@ class Login extends Component {
         this.setState({ [input]: value });
     };
 
-    handleSubmit = (event) =>{
-        event.preventDefault();
-        this.setState({isLoading: true});
+   onSubmit = () =>{
+       const {identifier, password} = this.state;
+        this.props.dispatch(authorize(identifier, password))
     };
 
     render() {
@@ -35,7 +36,7 @@ class Login extends Component {
                         LOGIN
                     </div>
                     <div className='auth'>
-                        <form action="/login" method="post" onSubmit={this.handleSubmit}>
+                        <form action="/login" method="post">
                             <div className="form-group">
                                 <label htmlFor="formGroupExampleInput">Username</label>
                                 <input
@@ -63,6 +64,7 @@ class Login extends Component {
                             <div className='btn-group'>
                                 <button
                                     className='btn-primary'
+                                    onClick={this.onSubmit}
                                     disabled={isLoading}
                                 >
                                     Login
@@ -76,6 +78,9 @@ class Login extends Component {
         )
     }
 }
+const mapStateToProps = (state) =>({
+      token: state.authReducer.token,
+      error: state.authReducer.error
+});
 
-
-export default connect(null, {login: auth})(Login);
+export default connect(mapStateToProps)(Login);

@@ -13,7 +13,7 @@ const intialState = {
 };
 
 const authReducer = (state = intialState, {type: payload}) => {
-    switch(type){
+    switch(action.type){
         case AUTH_SUCCESS: {
             return {...state, token: payload};
         }
