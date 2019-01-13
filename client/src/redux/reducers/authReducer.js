@@ -2,13 +2,12 @@ export const AUTH_REQUEST = AUTH_REQUEST;
 export const AUTH_SUCCESS = AUTH_SUCCESS;
 export const AUTH_FAIL = AUTH_FAIL;
 
-
-const intialState = {
+const intlState = {
     token: localStorage.getItem('token'),
     error: null
 };
 
-const authReducer = (state = intialState, {type, payload}) => {
+const authReducer = (state = intlState, {type, payload}) => {
     switch(type){
         case AUTH_SUCCESS: {
             return {...state, token: payload};

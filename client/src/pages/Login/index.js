@@ -14,8 +14,9 @@ class Login extends Component {
         };
     }
 
-    handleChange = (input, value) =>{
-        this.setState({ [input]: value });
+    handleChange = (event) =>{
+        const {name, value} = event.target;
+        this.setState({ [name]: value });
     };
 
    onSubmit = () =>{
