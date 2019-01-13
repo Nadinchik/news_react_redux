@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.display-3 {
+  display: block;
+  text-align: left;
+}
+
+.NewsList{
+  display: flex;
+  flex-direction: column;
+}
+
+.card{
+  margin-bottom: 20px;
+}
+
+.LinkGo,
+.LinkGoUser{
+  display: block;
+  position: absolute;
+  top: 35px;
+  right: 120px;
+}
+.LinkGoUser{
+  margin-top: 20px;
+}
+
+.formAuth{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 600px;
+}
+
+.card-title{
+  font-size: 32px;
+  font-weight: bold;
+}
+.btn-group a{
+  margin-left: 20px;
+  list-style: none;
+  text-decoration: none;
+}
+.btn-group a:hover{
+  color: #0014ad;
+}
+
+.FormAdd {
+  input, textarea {
+    width: 100%;
+    padding: 5px 15px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  textarea {
+    height: 90px;
+  }
+}
+
+.addButton {
+  color: #fff;
+  padding: 5px 35px;
+  background: #356197;
+}
+button.closeBtn{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+button, textarea, input {
+  &:focus {
+    outline: none;
+  }
+}
+
+a, button {
+  transition: .2s;
+}
+
+textarea {
+  resize: none;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
