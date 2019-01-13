@@ -1,4 +1,4 @@
-import {call, put, takeLatest} from 'redux-saga/effects';
+import  {call, put, takeLatest } from 'redux-saga/effects';
 import {AUTH_REQUEST, AUTH_FAIL, AUTH_SUCCESS} from "../reducers/authReducer";
 
 function* authorize({payload: {identifier, password}}) {

@@ -2,8 +2,7 @@ import React,  { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { auth } from "../../redux/actions/auth";
-import authorize from "../../redux/reducers/authReducer";
+import { authorize } from "../../redux/actions/auth";
 
 class Login extends Component {
     constructor(props) {

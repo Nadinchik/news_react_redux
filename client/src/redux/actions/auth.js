@@ -1,9 +1,7 @@
-// export function auth(data) {
-//     return dispatch => {
-//         return fetch('/api/auth',{
-//             method: 'POST'
-//         })
-//             .then(response => response.json())
-//             .then(data => this.setState({data}))
-//     }
-// }
+import AUTH_REQUEST from "../reducers/authReducer";
+
+export const authorize = (identifier, password) => ({
+    type: AUTH_REQUEST,
+    payload: { identifier, password }
+});
+
