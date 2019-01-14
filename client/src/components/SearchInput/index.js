@@ -5,9 +5,9 @@ class SearchInput extends Component {
         super(props);
     }
 
-    handleChange(term) {
-        this.props.onSearchTermChange(term);
-    }
+    // handleChange(term) {
+    //     this.props.onSearchTermChange(term);
+    // }
 
     render() {
         return (

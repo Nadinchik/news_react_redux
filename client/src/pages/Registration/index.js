@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import {authorize} from "../../redux/actions/auth";
+import {connect} from "react-redux";
+
+import { registration } from "../../redux/actions/signIn";
 
 class Registration extends Component {
   constructor(props) {
@@ -21,7 +23,10 @@ class Registration extends Component {
 
   onSubmit = () =>{
     const {identifier, password} = this.state;
-    this.props.dispatch(authorize(identifier, password));
+    const user ={
+
+    };
+    this.props.registration({ data: user });
   };
 
   render() {
@@ -103,4 +108,12 @@ class Registration extends Component {
   }
 }
 
-export default Registration;
+const mapStateToProps = state => ({
+  user: state.signInReducer.user,
+});
+
+const mapDispatchToProps = {
+  registration,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

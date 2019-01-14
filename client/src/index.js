@@ -6,7 +6,6 @@ import * as serviceWorker from "./serviceWorker";
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import './index.scss'
 
-
 ReactDOM.render(
     <BrowserRouter>
         <App />
@@ -14,6 +13,5 @@ ReactDOM.render(
 
     document.getElementById("root"),
 );
-
 
 serviceWorker.unregister();
