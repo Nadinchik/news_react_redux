@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { AUTH_REQUEST, AUTH_FAIL, AUTH_SUCCESS } from "../reducers/authReducer";
 
 const fetchJSON = (url, options = {}) =>
@@ -19,7 +19,7 @@ function* authorize({payload: {identifier, password}}) {
 
   try {
     const {token} = yield call(fetchJSON, '/login', options);
-    yield put({type: AUTH_SUCCESS, payload: token});
+    yield put({type: 'AUTH_SUCCESS', payload: token});
     localStorage.setItem('token', token);
   } catch (error) {
     let message;
@@ -40,7 +40,9 @@ function* authorize({payload: {identifier, password}}) {
 
 
 function* mySaga() {
-  yield takeLatest(AUTH_REQUEST, authorize);
+  yield all([
+    takeLatest('AUTH_REQUEST', authorize),
+  ]);
 }
 
 export default mySaga;

@@ -4,8 +4,9 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.2.1",
-    "node-sass": "^4.11.0",
     "fetch": "^1.1.0",
+    "node-sass": "^4.11.0",
+    "path": "^0.12.7",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-modal": "^3.8.1",
