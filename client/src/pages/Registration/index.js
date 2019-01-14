@@ -22,8 +22,11 @@ class Registration extends Component {
   };
 
   onSubmit = () =>{
-    // const {firstName, lastName, identifier, password} = this.state;
     const user = {
+      firstName: '',
+      lastName: '',
+      identifier: '',
+      password: ''
     };
     this.props.REGISTRATION_USER_REQUEST({ data: user });
   };
@@ -40,7 +43,7 @@ class Registration extends Component {
             REGISTER
           </div>
           <div className='auth'>
-            <form action="/registration" method="post">
+            <form action="/signIn" method="post">
               <div className="form-group">
                 <label htmlFor="formGroupExampleInput">First name</label>
                 <input
