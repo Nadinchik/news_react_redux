@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Link} from "react-router-dom";
-import {connect} from "react-redux";
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { registration } from "../../redux/actions/signIn";
 
@@ -22,8 +22,8 @@ class Registration extends Component {
   };
 
   onSubmit = () =>{
-    const {identifier, password} = this.state;
-    const user ={
+    const {firstName, lastName, identifier, password} = this.state;
+    const user = {
 
     };
     this.props.registration({ data: user });
