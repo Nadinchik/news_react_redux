@@ -30,7 +30,7 @@ class News extends Component {
                         <Link to="/login">Login</Link>
                     </div>
                     <div className="LinkGoUser">
-                        <Link to="/User">User</Link>
+                        <Link to="/user">User</Link>
                     </div>
                 </div>
                 <div>
