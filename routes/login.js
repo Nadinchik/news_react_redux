@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let flash = require('connect-flash');
+let router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+module.exports = function (passport) {
 
-module.exports = router;
+  router.post('/login', passport.authenticate('login', {
+    successRedirect: '/user',
+    failureRedirect: '/',
+    failureFlash: true
+  }));
+
+  return router;
+};
