@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { registration } from "../../redux/actions/signIn";
+import {REGISTRATION_USER_REQUEST} from "../../redux/actions/signIn";
 
 class Registration extends Component {
   constructor(props) {
@@ -22,11 +22,10 @@ class Registration extends Component {
   };
 
   onSubmit = () =>{
-    const {firstName, lastName, identifier, password} = this.state;
+    // const {firstName, lastName, identifier, password} = this.state;
     const user = {
-
     };
-    this.props.registration({ data: user });
+    this.props.REGISTRATION_USER_REQUEST({ data: user });
   };
 
   render() {
@@ -113,7 +112,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  registration,
+  REGISTRATION_USER_REQUEST,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

@@ -1,6 +1,5 @@
-import { call, put, all, takeLatest, fork } from 'redux-saga/effects';
+import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { AUTH_REQUEST, AUTH_FAIL, AUTH_SUCCESS } from "../reducers/authReducer";
-// import registration from "./registration";
 
 const fetchJSON = (url, options = {}) =>
   new Promise((resolve, reject) => {
@@ -34,7 +33,7 @@ function* authorize({payload: {identifier, password}}) {
       default:
         message = 'Something went wrong';
     }
-    yield put({type: AUTH_FAIL, payload: message});
+    yield put({type: 'AUTH_FAIL', payload: message});
     localStorage.removeItem('token');
   }
 }
@@ -42,7 +41,6 @@ function* authorize({payload: {identifier, password}}) {
 function* mySaga() {
   yield all([
     takeLatest('AUTH_REQUEST', authorize),
-    // fork(registration),
   ]);
 }
 
