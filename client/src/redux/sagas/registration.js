@@ -2,22 +2,14 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 function* registration() {yield takeEvery('REGISTRATION_USER', registrationUser)}
 
-function* registrationUser(action) {
-  try {
-    console.log('action -->', action);
+function registrationUser(user) {
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user)
+  };
 
-    const response = fetch(
-
-    );
-
-    // console.log(response);
-
-    // yield put({ type: 'REGISTRATION_USER_SUCCEEDED', payload: response.data });
-
-    // Тут запрос на сервер
-  }catch{
-
-  }
+  return fetch('/signIn', options).then();
 }
 
 export default registration();
