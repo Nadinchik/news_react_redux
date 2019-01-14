@@ -45,7 +45,7 @@ class Login extends Component {
                                     className="form-control username"
                                     id="formGroupExampleInput"
                                     value={identifier}
-                                    onChange={this.handleChange(identifier)}
+                                    onChange={this.handleChange}
                                     placeholder="Username/email"
                                 />
                             </div>
@@ -57,7 +57,7 @@ class Login extends Component {
                                     className="form-control password"
                                     id="formGroupExampleInput2"
                                     value={password}
-                                    onChange={this.handleChange(password)}
+                                    onChange={this.handleChange}
                                     placeholder="Password"
                                 />
                             </div>

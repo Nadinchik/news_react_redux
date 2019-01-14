@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.2.1",
-    "fetch": "^1.1.0",
     "node-sass": "^4.11.0",
+    "fetch": "^1.1.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-modal": "^3.8.1",
@@ -34,5 +34,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.7"
+  }
 }
