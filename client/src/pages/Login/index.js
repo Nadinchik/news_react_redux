@@ -21,11 +21,13 @@ class Login extends Component {
 
    onSubmit = () =>{
        const {identifier, password} = this.state;
-        this.props.dispatch(authorize(identifier, password))
+        this.props.dispatch(authorize(identifier, password));
     };
 
     render() {
         const {identifier, password, isLoading} = this.state;
+        console.log('this.state -->', this.state);
+
         return (
             <div className='thead-light'>
                 <div className="LinkGoBack">
