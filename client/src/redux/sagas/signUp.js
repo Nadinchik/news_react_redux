@@ -2,7 +2,7 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 
 
-function* registrationUser(action) {
+function* signUpUser(action) {
   const options = {
     url: '/auth/signUp',
     method: 'POST',
@@ -20,8 +20,8 @@ function* registrationUser(action) {
   }
 }
 
-function* registration() {
-  yield takeEvery('REGISTRATION_USER_REQUEST', registrationUser)
+function* signUp() {
+  yield takeEvery('REGISTRATION_USER_REQUEST', signUpUser)
 }
 
-export default registration;
+export default signUp;

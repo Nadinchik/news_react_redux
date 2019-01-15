@@ -1,4 +1,4 @@
-const initialState= {
+const intialState= {
     news: [
         {
             "id": "56c782f1978fdf9a0100df52",
@@ -16,7 +16,7 @@ const initialState= {
     ]
 };
 
-function newsReducer(state = initialState, action) {
+function newsReducer(state = intialState, action) {
     if (action.type === 'ADD_NEWS') {
         return {
             ...state,

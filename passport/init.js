@@ -18,5 +18,5 @@ module.exports = function (passport) {
   });
 
   login(passport);
-  signIn(passport);
+  signUp(passport);
 };

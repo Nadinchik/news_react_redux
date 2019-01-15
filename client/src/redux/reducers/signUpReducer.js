@@ -1,5 +1,3 @@
-import {REGISTRATION_USER_REQUEST, REGISTRATION_USER_SUCCESS, REGISTRATION_USER_FAIL} from "../actions/signUp";
-
 
 const intialState = {
   userData: {},
@@ -8,19 +6,19 @@ const intialState = {
 
 const signUpReducer = (state = intialState, action) => {
   switch (action.type) {
-    case REGISTRATION_USER_REQUEST: {
+    case 'SIGN_UP_USER_REQUEST': {
       return {
         userData: {},
         error: false
       };
     }
-    case REGISTRATION_USER_SUCCESS: {
+    case 'SIGN_UP_USER_SUCCESS': {
       return {
         userData: {},
         error: false
       };
     }
-    case REGISTRATION_USER_FAIL: {
+    case 'SIGN_UP_USER_FAIL': {
       return {
         userData: {},
         error: action.error

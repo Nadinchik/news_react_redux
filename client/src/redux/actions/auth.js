@@ -1,6 +1,6 @@
 
-export const authorize = (identifier, password) => ({
+export const authorize = (username, password) => ({
   type: 'AUTH_REQUEST',
-  payload: {identifier, password}
+  payload: {username, password}
 });
 

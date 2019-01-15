@@ -2,12 +2,12 @@ let LocalStrategy = require('passport-local').Strategy;
 let User = require('../models/User_model');
 
 module.exports = function(passport){
-  passport.use('signIn', new LocalStrategy({
+  passport.use('signUp', new LocalStrategy({
     passReqToCallback : true
     },
-    function (req, firstName, lastName, identifier, password, done) {
+    function (req, firstName, lastName, username, password, done) {
       findOrCreateUser = function(){
-        User.findOne({identifier}, function (err, user) {
+        User.findOne({username}, function (err, user) {
           if(err){
             console.log('err -->', err);
             return done(err);
@@ -19,7 +19,7 @@ module.exports = function(passport){
             let newUser = new User();
             newUser.firstName = req.param.firstName;
             newUser.lastName = req.param.lastName;
-            newUser.identifier = identifier;
+            newUser.username = username;
             newUser.password = password;
 
             newUser.save(function(err){
@@ -27,7 +27,7 @@ module.exports = function(passport){
                 console.log('err -->', err);
                 throw err;
               }
-              console.log('User sign in successful');
+              console.log('User sign up successful');
               return done(err, newUser)
             });
           }

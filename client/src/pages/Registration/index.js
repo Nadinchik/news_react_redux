@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {REGISTRATION_USER_REQUEST} from "../../redux/actions/signUp";
+import signUpRequest from "../../redux/actions/signUp";
 
 class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      identifier: '',
+      fullName: '',
+      username: '',
       password: '',
       isLoading: false
     };
@@ -23,16 +22,15 @@ class Registration extends Component {
 
   onSubmit = () =>{
     const user = {
-      // firstName: '',
-      // lastName: '',
-      username: this.state.identifier,
+      fullName: this.state.fullName,
+      username: this.state.username,
       password: this.state.password,
     };
-    this.props.REGISTRATION_USER_REQUEST({ user });
+    this.props.signUpRequest({ user });
   };
 
   render() {
-    const {firstName, lastName, identifier, password, isLoading} = this.state;
+    const {fullName, username, password, isLoading} = this.state;
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">
@@ -43,28 +41,16 @@ class Registration extends Component {
             REGISTER
           </div>
           <div className='auth'>
-            <form action="/signUp" method="post">
+            <form method="post">
               <div className="form-group">
-                <label htmlFor="formGroupExampleInput">First name</label>
+                <label htmlFor="formGroupExampleInput">Full name</label>
                 <input
                   type="text"
-                  name="firstName"
+                  name="fullName"
                   className="form-control username"
                   id="formGroupExampleInput"
-                  placeholder="First name"
-                  value={firstName}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="formGroupExampleInput">Last name</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  className="form-control username"
-                  id="formGroupExampleInput"
-                  placeholder="Last name"
-                  value={lastName}
+                  placeholder="Full name"
+                  value={fullName}
                   onChange={this.handleChange}
                 />
               </div>
@@ -72,10 +58,10 @@ class Registration extends Component {
                 <label htmlFor="formGroupExampleInput">Username</label>
                 <input
                   type="text"
-                  name="identifier"
+                  name="username"
                   className="form-control username"
                   id="formGroupExampleInput"
-                  value={identifier}
+                  value={username}
                   onChange={this.handleChange}
                   placeholder="Username/email"
                 />
@@ -110,12 +96,8 @@ class Registration extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.signUpReducer.user,
+const mapDispatchToProps = dispatch => ({
+  signup: (fullName, username, password) => dispatch(signUpActions.signUpRequest(fullname, username, password))
 });
 
-const mapDispatchToProps = {
-  REGISTRATION_USER_REQUEST,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Registration);
+export default connect(null, mapDispatchToProps)(Registration);

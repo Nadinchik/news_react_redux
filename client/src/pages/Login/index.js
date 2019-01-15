@@ -8,7 +8,7 @@ class Login extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      identifier: '',
+      username: '',
       password: '',
       isLoading: false
     };
@@ -20,12 +20,12 @@ class Login extends PureComponent {
   };
 
   onSubmit = () => {
-    const {identifier, password} = this.state;
-    this.props.authorize(identifier, password);
+    const {username, password} = this.state;
+    this.props.authorize(username, password);
   };
 
   render() {
-    const {identifier, password, isLoading} = this.state;
+    const {username, password, isLoading} = this.state;
     console.log('this.state -->', this.state);
 
     return (
@@ -43,10 +43,10 @@ class Login extends PureComponent {
                 <label htmlFor="formGroupExampleInput">Username</label>
                 <input
                   type="text"
-                  name="identifier"
+                  name="username"
                   className="form-control username"
                   id="formGroupExampleInput"
-                  value={identifier}
+                  value={username}
                   onChange={this.handleChange}
                   placeholder="Username/email"
                 />

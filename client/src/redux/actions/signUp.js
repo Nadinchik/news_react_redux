@@ -1,15 +1,17 @@
-export const REGISTRATION_USER_REQUEST = data => ({
-  type: 'REGISTRATION_USER_REQUEST',
-  data,
+export const signUpRequest = (fullName, username, password) => ({
+  type: 'SIGN_UP_USER_REQUEST',
+  fullName,
+  username,
+  password
 });
 
-export const REGISTRATION_USER_SUCCESS = data => ({
-  type: 'REGISTRATION_USER_SUCCESS',
+export const signUpSuccess = data => ({
+  type: 'SIGN_UP_USER_SUCCESS',
   data
 });
 
-export const REGISTRATION_USER_FAIL = (data, error) => ({
-  type: 'REGISTRATION_USER_FAIL',
+export const signUpFail = (data, error) => ({
+  type: 'SIGN_UP_USER_FAIL',
   data,
   error
 });

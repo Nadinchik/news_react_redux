@@ -9,7 +9,7 @@ let db = require('./db/db');
 let User = require('./models/User_model');
 let passport = require('passport');
 let indexRouter = require('./routes/index');
-let authRouter = require('./routes/auth');
+let signUpRouter = require('./routes/signup');
 let expressSession = require('express-session');
 let LocalStrategy = require('passport-local').Strategy;
 
@@ -44,7 +44,7 @@ passport.use('signUp', new LocalStrategy(
       if (user) {
         return done(null, false, 'That email is already taken.');
       } else {
-        var newUser = new User();
+        let newUser = new User();
 
         newUser.username = username;
         newUser.password = password;
@@ -70,7 +70,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 app.use('/', indexRouter);
-app.use('/auth', authRouter);
+app.use('/signUp', signUpRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
