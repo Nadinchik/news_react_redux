@@ -24,6 +24,10 @@ function* signUp({fullName, username, password}) {
   } catch (e) {
     yield put(signUpActions.signUpFail(e.statusText))
   }
+
+  // logout(callback){
+  //   localStorage.removeItem('isLogged');
+  // }
 };
 
 export default function* signUpSaga() {
