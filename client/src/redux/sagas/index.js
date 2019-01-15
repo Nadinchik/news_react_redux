@@ -14,7 +14,8 @@ function* authorize({payload: {identifier, password}}) {
   const options = {
     body: JSON.stringify({identifier, password}),
     method: 'POST',
-    headers: {'Content-Type': 'application/json'}
+    headers: {'Content-Type': 'application/json'},
+
   };
 
   try {
