@@ -1,5 +1,5 @@
 let login = require('./login');
-let signIn = require('./signIn');
+let signIn = require('./signUp');
 let User = require('../models/User_model');
 
 module.exports = function (passport) {

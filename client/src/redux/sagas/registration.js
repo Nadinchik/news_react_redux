@@ -1,18 +1,27 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {REGISTRATION_USER_FAIL, REGISTRATION_USER_REQUESTR} from "../actions/signUp"
+import axios from 'axios';
+
+
+function* registrationUser(action) {
+  const options = {
+    url: '/auth/signUp',
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    data: action.data.user,
+  };
+
+  try {
+    const response = yield call(axios, options);
+    console.log('response -->', response);
+    yield put({ type: 'success', data: response})
+
+  } catch (e) {
+    yield put({ type: 'error', data: e.message})
+  }
+}
 
 function* registration() {
   yield takeEvery('REGISTRATION_USER_REQUEST', registrationUser)
 }
 
-function* registrationUser(user) {
-  const options = {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(user)
-  };
-  return fetch('/signIn', options).then(registration),
-    yield put({type: 'REGISTRATION_USER_FAIL', payload: message});
-}
-
-export default registration();
+export default registration;

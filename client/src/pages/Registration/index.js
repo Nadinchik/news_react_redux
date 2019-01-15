@@ -23,12 +23,12 @@ class Registration extends Component {
 
   onSubmit = () =>{
     const user = {
-      firstName: '',
-      lastName: '',
-      identifier: '',
-      password: ''
+      // firstName: '',
+      // lastName: '',
+      username: this.state.identifier,
+      password: this.state.password,
     };
-    this.props.REGISTRATION_USER_REQUEST({ data: user });
+    this.props.REGISTRATION_USER_REQUEST({ user });
   };
 
   render() {
