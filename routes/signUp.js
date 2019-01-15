@@ -6,8 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
-
-passport.use('signUp', new LocalStrategy({
+passport.use(new LocalStrategy({
     passReqToCallback: true,
     usernameField: 'username',
     passwordField: 'password',
@@ -25,8 +24,8 @@ passport.use('signUp', new LocalStrategy({
         });
         user.save(function (err) {
           if (err) return next(err);
-          console.log('user -->', user);
         });
+        console.log('user -->', user);
         return done(null, user);
       } else {
         return done({ status: 409 }, false);
@@ -35,7 +34,7 @@ passport.use('signUp', new LocalStrategy({
   }));
 
 router.post('/',
-  passport.authenticate('signUp', { failureRedirect: '/' }),
+  passport.authenticate('local', { failureRedirect: '/' }),
   function (req, res) {
     res.send({ user: req.user });
   });
