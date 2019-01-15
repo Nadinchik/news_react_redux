@@ -1,7 +1,6 @@
-import {call, put, takeLatest} from 'redux-saga/effects';
+import {all, call, put, takeLatest} from 'redux-saga/effects';
 import * as signUpActions from "../actions/signUp";
 import API from "../sagas/services";
-
 
 function* signUp({fullName, username, password}) {
   console.log('fullName, username, password -->', fullName, username, password);
@@ -17,14 +16,14 @@ function* signUp({fullName, username, password}) {
           username: username,
           password: password,
         }),
-      }),
-      console.log('data -->', data);
+      });
+    console.log('data -->', data);
 
-    yield put(signUpActions.signUpRequest(data.user));
+    yield put(signUpActions.signUpSuccess(data.user));
   } catch (e) {
     yield put(signUpActions.signUpFail(e))
   }
-}
+};
 
 export default function* signUpSaga() {
   yield all([

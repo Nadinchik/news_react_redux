@@ -5,13 +5,17 @@ export const signUpRequest = (fullName, username, password) => ({
   password
 });
 
-export const signUpSuccess = data => ({
+export const signUpSuccess = (fullName, username, password) => ({
   type: 'SIGN_UP_USER_SUCCESS',
-  data
+  fullName,
+  username,
+  password
 });
 
-export const signUpFail = (data, error) => ({
+export const signUpFail = (fullName, username, password, error) => ({
   type: 'SIGN_UP_USER_FAIL',
-  data,
+  fullName,
+  username,
+  password,
   error
 });

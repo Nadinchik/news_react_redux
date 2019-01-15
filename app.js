@@ -6,12 +6,10 @@ let bodyParser = require("body-parser");
 let logger = require('morgan');
 
 let db = require('./db/db');
-let User = require('./models/User_model');
 let passport = require('passport');
 let indexRouter = require('./routes/index');
 let signUpRouter = require('./routes/signup');
 let expressSession = require('express-session');
-let LocalStrategy = require('passport-local').Strategy;
 
 let app = express();
 
@@ -29,45 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
-
-//login strategy
-
-passport.use('signUp', new LocalStrategy(
-  {
-    passReqToCallback : true // allows us to pass back the entire request to the callback
-  },
-  function(req, username, password, done) {
-    User.findOne({username}, function (err, user) {
-      if (err)
-        return done(err);
-
-      if (user) {
-        return done(null, false, 'That email is already taken.');
-      } else {
-        let newUser = new User();
-
-        newUser.username = username;
-        newUser.password = password;
-
-        newUser.save(function (err) {
-          if (err)
-            throw err;
-          return done(null, newUser);
-        });
-      }
-    })
-  })
-);
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
 
 app.use('/', indexRouter);
 app.use('/signUp', signUpRouter);
