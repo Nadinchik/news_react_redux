@@ -1,27 +1,33 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
-import axios from 'axios';
+import {call, put, takeLatest} from 'redux-saga/effects';
+import * as signUpActions from "../actions/signUp";
+import API from "../sagas/services";
 
 
-function* signUpUser(action) {
-  const options = {
-    url: '/auth/signUp',
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    data: action.data.user,
-  };
-
+function* signUp({fullName, username, password}) {
+  console.log('fullName, username, password -->', fullName, username, password);
   try {
-    const response = yield call(axios, options);
-    console.log('response -->', response);
-    yield put({ type: 'success', data: response})
+    const data = yield call(API, '/signUp', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fullName: fullName,
+          username: username,
+          password: password,
+        }),
+      }),
+      console.log('data -->', data);
 
+    yield put(signUpActions.signUpRequest(data.user));
   } catch (e) {
-    yield put({ type: 'error', data: e.message})
+    yield put(signUpActions.signUpFail(e))
   }
 }
 
-function* signUp() {
-  yield takeEvery('REGISTRATION_USER_REQUEST', signUpUser)
+export default function* signUpSaga() {
+  yield all([
+    takeLatest('SIGN_UP_USER_REQUEST', signUp),
+  ]);
 }
-
-export default signUp;

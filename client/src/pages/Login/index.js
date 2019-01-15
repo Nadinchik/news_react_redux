@@ -38,7 +38,7 @@ class Login extends PureComponent {
             LOGIN
           </div>
           <div className='auth'>
-            <form action="/login" method="post">
+            <form method="post">
               <div className="form-group">
                 <label htmlFor="formGroupExampleInput">Username</label>
                 <input

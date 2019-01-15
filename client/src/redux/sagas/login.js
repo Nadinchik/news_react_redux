@@ -1,14 +1,7 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { AUTH_REQUEST, AUTH_FAIL, AUTH_SUCCESS } from "../reducers/authReducer";
+import API from "./services";
 
-const fetchJSON = (url, options = {}) =>
-  new Promise((resolve, reject) => {
-    return fetch(url, options)
-      .then(response => (response.status !== 200 ? reject(response) : response))
-      .then(response => response.json)
-      .then(response => resolve(response))
-      .catch(error => reject(error));
-  });
 
 function* authorize({payload: {identifier, password}}) {
   const options = {
@@ -19,7 +12,7 @@ function* authorize({payload: {identifier, password}}) {
   };
 
   try {
-    const {token} = yield call(fetchJSON, '/login', options);
+    const {token} = yield call(API, '/login', options);
     yield put({type: 'AUTH_SUCCESS', payload: token});
     localStorage.setItem('token', token);
   } catch (error) {

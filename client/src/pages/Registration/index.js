@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import signUpRequest from "../../redux/actions/signUp";
+import * as signUpActions from "../../redux/actions/signUp";
 
 class Registration extends Component {
   constructor(props) {
@@ -97,7 +97,7 @@ class Registration extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  signup: (fullName, username, password) => dispatch(signUpActions.signUpRequest(fullname, username, password))
+  signUp: (fullName, username, password) => dispatch(signUpActions.signUpRequest(fullname, username, password))
 });
 
 export default connect(null, mapDispatchToProps)(Registration);

@@ -1,4 +1,3 @@
-
 const intialState = {
   userData: {},
   error: false
