@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {REGISTRATION_USER_REQUEST} from "../../redux/actions/signIn";
+import {REGISTRATION_USER_REQUEST} from "../../redux/actions/signUp";
 
 class Registration extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Registration extends Component {
             REGISTER
           </div>
           <div className='auth'>
-            <form action="/signIn" method="post">
+            <form action="/signUp" method="post">
               <div className="form-group">
                 <label htmlFor="formGroupExampleInput">First name</label>
                 <input
@@ -111,7 +111,7 @@ class Registration extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.signInReducer.user,
+  user: state.signUpReducer.user,
 });
 
 const mapDispatchToProps = {

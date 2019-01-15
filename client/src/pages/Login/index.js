@@ -71,7 +71,7 @@ class Login extends PureComponent {
                 >
                   Login
                 </button>
-                <Link to="/signIn">Sign In</Link>
+                <Link to="/signUp">Sign Up</Link>
               </div>
             </form>
           </div>

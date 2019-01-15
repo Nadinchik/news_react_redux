@@ -4,13 +4,13 @@ let router = express.Router();
 
 module.exports = function (passport) {
 
-  router.get('/signIn', function (req, res) {
+  router.get('/signUp', function (req, res) {
     res.render('register', {message: req.flash('message')});
   });
 
-  router.post('/signIn', passport.authenticate('signIn', {
+  router.post('/signUp', passport.authenticate('signUp', {
     successRedirect: '/user',
-    failureRedirect: '/signIn',
+    failureRedirect: '/signUp',
     failureFlash : true
   }));
 
