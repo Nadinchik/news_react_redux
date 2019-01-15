@@ -1,10 +1,11 @@
+let passport = require('passport');
 let LocalStrategy = require('passport-local').Strategy;
 let User = require('../models/User_model');
 
-module.exports = function(passport) {
+module.exports = function() {
   passport.use('login', new LocalStrategy(
-    function (identifier, password, done) {
-      User.findOne({identifier}, function (err, user) {
+    function (username, password, done) {
+      User.findOne({username}, function (err, user) {
         if (err) {
           return done(err);
         }

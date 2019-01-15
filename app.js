@@ -8,10 +8,18 @@ let logger = require('morgan');
 let db = require('./db/db');
 let passport = require('passport');
 let indexRouter = require('./routes/index');
-let signUpRouter = require('./routes/signup');
+let signUpRouter = require('./routes/signUp');
 let expressSession = require('express-session');
 
 let app = express();
+
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.use('/', indexRouter);
 app.use('/signUp', signUpRouter);
