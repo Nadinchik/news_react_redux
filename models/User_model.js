@@ -17,7 +17,6 @@
 //
 // module.exports = User;
 let crypto = require('crypto');
-
 let mongoose = require('mongoose');
 
 let schema = new mongoose.Schema({

@@ -6,22 +6,22 @@ function* signUp({fullName, username, password}) {
   console.log('fullName, username, password -->', fullName, username, password);
   try {
     const data = yield call(API, '/signUp', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          fullName: fullName,
-          username: username,
-          password: password,
-        }),
-      });
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        fullName: fullName,
+        username: username,
+        password: password,
+      }),
+    });
     console.log('data -->', data);
 
     yield put(signUpActions.signUpSuccess(data.user));
   } catch (e) {
-    yield put(signUpActions.signUpFail(e))
+    yield put(signUpActions.signUpFail(e.statusText))
   }
 };
 

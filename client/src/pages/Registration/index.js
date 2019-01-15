@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import React, {Component} from 'react';
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
 import * as signUpActions from "../../redux/actions/signUp";
 
@@ -15,18 +15,21 @@ class Registration extends Component {
     };
   }
 
-  handleChange = (event) =>{
+  handleChange = (event) => {
     const {name, value} = event.target;
-    this.setState({ [name]: value });
+    this.setState({[name]: value});
   };
 
-  onSubmit = () =>{
-    const user = {
-      fullName: this.state.fullName,
-      username: this.state.username,
-      password: this.state.password,
-    };
-    this.props.signUpRequest({ user });
+  onSubmit = (e) => {
+    e.preventDefault();
+    const {fullName, username, password} = this.state;
+    const {signup} = this.props;
+    signup(fullName, username, password);
+    this.setState({
+      fullName:'',
+      username:'',
+      password:''
+    })
   };
 
   render() {
@@ -48,7 +51,7 @@ class Registration extends Component {
                   type="text"
                   name="fullName"
                   className="form-control username"
-                  id="formGroupExampleInput"
+                  // id="formGroupExampleInput"
                   placeholder="Full name"
                   value={fullName}
                   onChange={this.handleChange}
@@ -60,7 +63,7 @@ class Registration extends Component {
                   type="text"
                   name="username"
                   className="form-control username"
-                  id="formGroupExampleInput"
+                  // id="formGroupExampleInput"
                   value={username}
                   onChange={this.handleChange}
                   placeholder="Username/email"
@@ -72,7 +75,7 @@ class Registration extends Component {
                   type="password"
                   name='password'
                   className="form-control password"
-                  id="formGroupExampleInput2"
+                  // id="formGroupExampleInput2"
                   value={password}
                   onChange={this.handleChange}
                   placeholder="Password"
@@ -84,7 +87,7 @@ class Registration extends Component {
                   onClick={this.onSubmit}
                   disabled={isLoading}
                 >
-                  Sign In
+                  Sign Up
                 </button>
                 <button className='btn btn-outline-secondary'>Cancel</button>
               </div>
@@ -96,8 +99,12 @@ class Registration extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  signUp: (fullName, username, password) => dispatch(signUpActions.signUpRequest(fullname, username, password))
+const mapStateToProps = state => ({
+  error: state.signUpReducer.error,
 });
 
-export default connect(null, mapDispatchToProps)(Registration);
+const mapDispatchToProps = dispatch => ({
+  signup: (fullName, username, password) => dispatch(signUpActions.signUpRequest(fullName, username, password)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);
