@@ -1,13 +1,35 @@
 let express = require('express');
 let router = express.Router();
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function (passport) {
+let model = require('../models/User_model');
+const User = require('mongoose').model('users');
 
-  router.post('/login', passport.authenticate('login', {
-    successRedirect: '/user',
-    failureRedirect: '/',
-    failureFlash: true
+passport.use(new LocalStrategy({
+    passReqToCallback: true,
+    usernameField: 'username',
+    passwordField: 'password',
+  },
+  function (req, username, password, done) {
+    User.findOne({username}, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, {message: 'Incorrect username.'});
+      }
+      if (!user.password===password) {
+        return done(null, false, {message: 'Incorrect password.'});
+      }
+      return done(null, user);
+    });
   }));
 
-  return router;
-};
+router.post('/',
+  passport.authenticate('local', { failureRedirect: '/' }),
+  function (req, res) {
+    res.send({ user: req.user });
+  });
+
+module.exports = router;
