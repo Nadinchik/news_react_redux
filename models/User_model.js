@@ -20,6 +20,9 @@ let schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  google: {
+    googleId: { type: String, required: false }
+  },
 });
 
 schema.methods.encryptPassword = function (password) {

@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 import * as loginActions from "../../redux/actions/login";
+import googleButton from './google_login_buttons/btn_google_signin_light_normal_web.png';
 
 class Login extends PureComponent {
   constructor(props) {
@@ -45,6 +46,10 @@ class Login extends PureComponent {
             LOGIN
           </div>
           <div className='auth'>
+            <a href="/google">
+              {/* <GoogleButton /> */}
+              <img src={googleButton} alt="sign into Google Button" />
+            </a>
             <form method="post">
               <div className="form-group">
                 <label htmlFor="formGroupExampleInput">Username</label>
