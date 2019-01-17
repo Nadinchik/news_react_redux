@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {authorize} from "../../redux/actions/auth";
+import * as loginActions from "../../redux/actions/login";
 
 class Login extends PureComponent {
   constructor(props) {
@@ -19,10 +19,17 @@ class Login extends PureComponent {
     this.setState({[name]: value});
   };
 
-  onSubmit = () => {
+  onSubmit = (e) => {
+    e.preventDefault();
     const {username, password} = this.state;
-    this.props.authorize(username, password);
+    const {login} = this.props;
+    login(username, password);
+    this.setState({
+      username:'',
+      password:''
+    })
   };
+
 
   render() {
     const {username, password, isLoading} = this.state;
@@ -82,12 +89,11 @@ class Login extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  token: state.authReducer.token,
-  error: state.authReducer.error
+  error: state.loginReducer.error
 });
 
-const mapDispatchToProps = {
-  authorize,
-};
+const mapDispatchToProps = (dispatch) => ({
+  login: (username, password) => dispatch(loginActions.loginRequest(username, password)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

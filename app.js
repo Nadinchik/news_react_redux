@@ -9,6 +9,7 @@ let db = require('./db/db');
 let passport = require('passport');
 let indexRouter = require('./routes/index');
 let signUpRouter = require('./routes/signUp');
+let loginRouter = require('./routes/login');
 let expressSession = require('express-session');
 
 let app = express();
@@ -39,6 +40,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/signUp', signUpRouter);
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

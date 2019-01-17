@@ -1,47 +1,9 @@
-import { call, put, all, takeLatest } from 'redux-saga/effects';
-import { AUTH_REQUEST, AUTH_FAIL, AUTH_SUCCESS } from "../reducers/authReducer";
-import API from "./services";
-import * as signUpActions from "../actions/signUp";
+import {call, put, all, takeLatest} from 'redux-saga/effects';
+import * as loginActions from "../actions/login";
+import API from "../sagas/services";
 
-
-function* authorize( {identifier, password}) {
-  console.log('username, password -->', username, password);
-  try {
-    const options = {
-    body: JSON.stringify({username, password}),
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-  };
-    const {token} = yield call(API, '/login', options);
-    yield put({type: 'AUTH_SUCCESS', payload: token});
-    localStorage.setItem('token', token);
-  } catch (error) {
-    let message;
-    switch (error.status) {
-      case 500:
-        message = 'Internal server error';
-        break;
-      case 401:
-        message = 'Invalid credentials';
-        break;
-      default:
-        message = 'Something went wrong';
-    }
-    yield put({type: 'AUTH_FAIL', payload: message});
-    localStorage.removeItem('token');
-  }
-}
-
-function* mySaga() {
-  yield all([
-    takeLatest('AUTH_REQUEST', authorize),
-  ]);
-}
-
-export default mySaga;
-
-function* authorize({ username, password}) {
-  console.log('username, password -->', username, password);
+function* login({username, password}) {
+  console.log('usernameLogin, passwordLogin -->', username, password);
   try {
     const data = yield call(API, '/login', {
       method: 'POST',
@@ -54,21 +16,17 @@ function* authorize({ username, password}) {
         password: password,
       }),
     });
-    console.log('data -->', data);
+    console.log('dataLogin -->', data);
 
-    yield put(signUpActions.signUpSuccess(data.user));
-    localStorage.setItem('isLogged', true);
+    yield put(loginActions.loginSuccess(data.user));
+    // localStorage.setItem('isLogged', true);
   } catch (e) {
-    yield put(signUpActions.signUpFail(e.statusText))
+    yield put(loginActions.loginFail(e.statusText))
   }
-
-  // logout(callback){
-  //   localStorage.removeItem('isLogged');
-  // }
 };
 
 export default function* loginSaga() {
   yield all([
-    takeLatest('AUTH_REQUEST', authorize),
+    takeLatest('LOGIN_REQUEST', login),
   ]);
 }

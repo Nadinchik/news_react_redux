@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import newsReducer from "./newsReducers";
-import authReducer from "./authReducer";
+import loginReducer from "./loginReducer";
 import signUpReducer from "./signUpReducer";
 
 export default combineReducers({
     newsReducer,
-    authReducer,
+    loginReducer,
     signUpReducer,
 })
