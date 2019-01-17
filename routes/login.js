@@ -28,12 +28,15 @@ passport.use(new LocalStrategy({
   },
 ));
 
-
-router.post('/',
-  passport.authenticate('local', {failureRedirect: '/'}),
-  function (req, res) {
-    res.send({user: req.user})
-  }
-);
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/');
+    });
+  })(req, res, next);
+});
 
 module.exports = router;

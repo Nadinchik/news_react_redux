@@ -6,8 +6,10 @@ let bodyParser = require("body-parser");
 let logger = require('morgan');
 
 let db = require('./db/db');
+const User = require('mongoose').model('users');
 let passport = require('passport');
 let indexRouter = require('./routes/index');
+let userRouter = require('./routes/user');
 let signUpRouter = require('./routes/signUp');
 let loginRouter = require('./routes/login');
 let googleRouter = require('./routes/google');
@@ -16,11 +18,13 @@ let expressSession = require('express-session');
 let app = express();
 
 passport.serializeUser(function (user, done) {
-  done(null, user);
+  done(null, user.id);
 });
 
-passport.deserializeUser(function (user, done) {
-  done(null, user);
+passport.deserializeUser(function (id, done) {
+  User.findById(id)
+    .then(user => done(null, user))
+    .catch(done);
 });
 
 // view engine setup
@@ -40,6 +44,7 @@ app.use(passport.session());
 
 
 app.use('/', indexRouter);
+app.use('/user', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/google', googleRouter);

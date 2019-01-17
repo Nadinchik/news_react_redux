@@ -1,44 +1,40 @@
 let express = require('express');
 let router = express.Router();
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require('passport');
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/google/callback'
+    clientID: '932534981003-thcpid6t7bcarjhhbadhh2ctf0tqu93b.apps.googleusercontent.com',
+    clientSecret: 'xr7XPXJOHqbPrUUYVvB8MzjP',
+    callbackURL: 'http://localhost:3000/google/callback'
   },
   function (token, tokenSecret, profile, done) {
-    // testing
+
     console.log('===== GOOGLE PROFILE =======');
     console.log(profile);
     console.log('======== END ===========');
-    // code
+
     const {id, name} = profile;
-    User.findOne({'google.googleId': id}, (err, user) => {
-      // handle errors here:
+    User.findOne({googleId: id}, (err, user) => {
       if (err) {
         console.log('Error!! trying to find user with googleId');
         console.log(err);
         return done(null, false);
       }
-      // if there is already someone with that googleId
+
       if (user) {
         return done(null, user)
       } else {
-        // if no user in our db, create a new user with that googleId
-        console.log('====== PRE SAVE =======');
         console.log(id);
         console.log(profile);
-        console.log('====== post save ....');
         const newGoogleUser = new User({
-          'google.googleId': id,
+          googleId: id,
           username: name.username,
           fullName: name.fullName,
         });
-        // save this user
+
         newGoogleUser.save((err, savedUser) => {
           if (err) {
             console.log('Error!! saving the new google user');
@@ -53,7 +49,8 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-router.get('/google', passport.authenticate('google',  { scope: ['profile'] }));
+router.get('/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 router.get(
   '/google/callback',

@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import {GoogleLogin} from 'react-google-login';
 
 import * as loginActions from "../../redux/actions/login";
-import googleButton from './google_login_buttons/btn_google_signin_light_normal_web.png';
+
 
 class Login extends PureComponent {
   constructor(props) {
@@ -26,8 +27,8 @@ class Login extends PureComponent {
     const {login} = this.props;
     login(username, password);
     this.setState({
-      username:'',
-      password:''
+      username: '',
+      password: ''
     })
   };
 
@@ -36,6 +37,9 @@ class Login extends PureComponent {
     const {username, password, isLoading} = this.state;
     console.log('this.state -->', this.state);
 
+    const responseGoogle = (response) => {
+      console.log(response);
+    };
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">
@@ -46,10 +50,14 @@ class Login extends PureComponent {
             LOGIN
           </div>
           <div className='auth'>
-            <a href="/google">
-              {/* <GoogleButton /> */}
-              <img src={googleButton} alt="sign into Google Button" />
-            </a>
+
+            <GoogleLogin
+              clientId="932534981003-thcpid6t7bcarjhhbadhh2ctf0tqu93b.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+            />
+
             <form method="post">
               <div className="form-group">
                 <label htmlFor="formGroupExampleInput">Username</label>

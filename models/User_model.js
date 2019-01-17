@@ -2,7 +2,7 @@ let crypto = require('crypto');
 let mongoose = require('mongoose');
 
 let schema = new mongoose.Schema({
-  fullName:{
+  fullName: {
     type: String
   },
   username: {
@@ -20,9 +20,10 @@ let schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  google: {
-    googleId: { type: String, required: false }
-  },
+  googleId: {
+    type: String,
+  }
+
 });
 
 schema.methods.encryptPassword = function (password) {
