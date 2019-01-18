@@ -25,7 +25,7 @@ class Login extends PureComponent {
     }
     PostData('signUp', postData).then((result) => {
       let responseJson = result;
-      if (responseJson.users) {
+      if (responseJson.data) {
         sessionStorage.setItem('users', JSON.stringify(responseJson));
         this.setState({redirect: true});
       }
@@ -51,8 +51,6 @@ class Login extends PureComponent {
 
   render() {
     const {username, password, isLoading} = this.state;
-    console.log('this.state -->', this.state);
-
     const responseGoogle = (response) => {
       console.log(response);
     };

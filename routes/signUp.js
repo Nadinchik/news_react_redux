@@ -12,7 +12,7 @@ passport.use('local-signup', new LocalStrategy({
     passwordField: 'password',
   },
   function (req, username, password, done) {
-  
+
 
     User.findOne({username}, function (err, user) {
       if (err) {

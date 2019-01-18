@@ -6,7 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
-passport.use(new LocalStrategy({
+passport.use('local', new LocalStrategy({
     usernameField: 'username',
     passportField: 'password'
   },
@@ -33,6 +33,10 @@ router.post('/',
   function (req, res) {
     res.send({ user: req.user });
   });
+
+router.get('/user', function (req, res, next) {
+  res.send({ user: req.user });
+});
 
 // router.post('/', function(req, res, next) {
 //   passport.authenticate('local', function(err, user) {

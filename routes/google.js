@@ -12,10 +12,7 @@ passport.use(new GoogleStrategy({
     callbackURL: 'http://localhost:3000/google/callback'
   },
   function (profile, done) {
-
-    console.log('===== GOOGLE PROFILE =======');
     console.log(profile);
-    console.log('======== END ===========');
 
     const {id, name} = profile;
     User.findOne({googleId: id}, (err, user) => {
