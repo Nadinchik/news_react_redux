@@ -34,7 +34,7 @@ router.post('/',
     res.send({ user: req.user });
   });
 
-// router.post('/login', function(req, res, next) {
+// router.post('/', function(req, res, next) {
 //   passport.authenticate('local', function(err, user) {
 //     if (err) { return next(err); }
 //     if (!user) { return res.redirect('/login'); }

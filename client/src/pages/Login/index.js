@@ -21,12 +21,12 @@ class Login extends PureComponent {
   signup = (res, type) => {
     let postData;
     if (type === 'google' && res.w3.username) {
-
+      postData = { fullName: res.w3.ig, provider: type, username: res.w3.u3, provider_id: res.EL}
     }
     PostData('signUp', postData).then((result) => {
       let responseJson = result;
-      if (responseJson.userData) {
-        sessionStorage.setItem('userData', JSON.stringify(responseJson));
+      if (responseJson.users) {
+        sessionStorage.setItem('users', JSON.stringify(responseJson));
         this.setState({redirect: true});
       }
     })

@@ -6,12 +6,14 @@ const LocalStrategy = require('passport-local').Strategy;
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
-passport.use(new LocalStrategy({
+passport.use('local-signup', new LocalStrategy({
     passReqToCallback: true,
     usernameField: 'username',
     passwordField: 'password',
   },
   function (req, username, password, done) {
+  
+
     User.findOne({username}, function (err, user) {
       if (err) {
         return done(err);
@@ -34,8 +36,9 @@ passport.use(new LocalStrategy({
   }));
 
 router.post('/',
-  passport.authenticate('local', {failureRedirect: '/'}),
+  passport.authenticate('local-signup', {failureRedirect: '/'}),
   function (req, res) {
+    console.log('req.user -->', req.user);
     res.send({user: req.user});
   });
 

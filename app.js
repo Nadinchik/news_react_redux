@@ -18,15 +18,15 @@ let expressSession = require('express-session');
 
 let app = express();
 
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.findById(id)
-    .then(user => done(null, user))
-    .catch(done);
-});
+// passport.serializeUser(function (user, done) {
+//   done(null, user.id);
+// });
+//
+// passport.deserializeUser(function (id, done) {
+//   User.findById(id)
+//     .then(user => done(null, user))
+//     .catch(done);
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,6 +49,16 @@ app.use('/user', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/google', googleRouter);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id)
+    .then(user => done(null, user))
+    .catch(done);
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
