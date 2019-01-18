@@ -53,7 +53,7 @@ class Login extends PureComponent {
 
             <GoogleLogin
               clientId="932534981003-thcpid6t7bcarjhhbadhh2ctf0tqu93b.apps.googleusercontent.com"
-              buttonText="Login"
+              buttonText="Login with Google"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
             />

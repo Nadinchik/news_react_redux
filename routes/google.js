@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require('passport');
+
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
@@ -10,7 +11,7 @@ passport.use(new GoogleStrategy({
     clientSecret: 'xr7XPXJOHqbPrUUYVvB8MzjP',
     callbackURL: 'http://localhost:3000/google/callback'
   },
-  function (token, tokenSecret, profile, done) {
+  function (profile, done) {
 
     console.log('===== GOOGLE PROFILE =======');
     console.log(profile);

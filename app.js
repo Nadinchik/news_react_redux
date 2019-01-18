@@ -6,6 +6,7 @@ let bodyParser = require("body-parser");
 let logger = require('morgan');
 
 let db = require('./db/db');
+let model = require('./models/User_model');
 const User = require('mongoose').model('users');
 let passport = require('passport');
 let indexRouter = require('./routes/index');
