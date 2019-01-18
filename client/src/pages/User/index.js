@@ -40,7 +40,7 @@ class User extends Component {
     render() {
         const {isOpen, news} = this.state;
         return (
-          
+
             <div className="container">
                 <button
                     className="addButton"

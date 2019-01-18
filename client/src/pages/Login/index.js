@@ -86,7 +86,7 @@ class Login extends PureComponent {
                   id="formGroupExampleInput"
                   value={username}
                   onChange={this.handleChange}
-                  placeholder="Username/email"
+                  placeholder="Username"
                 />
               </div>
               <div className="form-group">
