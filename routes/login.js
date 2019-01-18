@@ -43,19 +43,19 @@ passport.use('local', new LocalStrategy({
 //   });
 
 router.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local',  function(err, user, info) {
     if (err) { return next(err); }
 
     console.log('Post--- user -->', user);
 
-    if (!user) { return res.redirect('/login'); }
+    if (!user) { return res.send({message:'User'}); }
 
     req.logIn(user, function(err) {
 
-      console.log('Post--- user.username-->',  user.username);
+      console.log('Post--- user-->',  user);
 
       if (err) { return next(err); }
-      return res.redirect('/users/' + user.username);
+      return res.send({user});
     });
   })(req, res, next);
 });
