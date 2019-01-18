@@ -1,10 +1,11 @@
 import React, {PureComponent} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 
 import * as loginActions from "../../redux/actions/login";
-
+import {PostData} from "../../components/services/PostData";
 
 class Login extends PureComponent {
   constructor(props) {
@@ -12,9 +13,24 @@ class Login extends PureComponent {
     this.state = {
       username: '',
       password: '',
-      isLoading: false
+      isLoading: false,
+      redirect: false
     };
   }
+
+  signup = (res, type) => {
+    let postData;
+    if (type === 'google' && res.w3.username) {
+
+    }
+    PostData('signUp', postData).then((result) => {
+      let responseJson = result;
+      if (responseJson.userData) {
+        sessionStorage.setItem('userData', JSON.stringify(responseJson));
+        this.setState({redirect: true});
+      }
+    })
+  };
 
   handleChange = (event) => {
     const {name, value} = event.target;
@@ -40,6 +56,10 @@ class Login extends PureComponent {
     const responseGoogle = (response) => {
       console.log(response);
     };
+
+    if (this.state.redirect) {
+      return (<Redirect to={'/'} />)
+    }
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">
