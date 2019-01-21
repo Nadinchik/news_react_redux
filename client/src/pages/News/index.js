@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 
 import ModalWindow from "../../components/Modal";
 import FormAddNews from "../../components/FormAddNews"
@@ -14,7 +14,7 @@ class News extends Component {
     this.state = {
       isOpen: false,
       isEdit: false,
-      news:{
+      news: {
         title: '',
         text: '',
         date: new Date(),
@@ -35,22 +35,14 @@ class News extends Component {
   AddNews = (e) => {
     e.preventDefault();
     const {news: {title, text, author}} = this.state;
-    if(title.trim() && text.trim() && author.trim() ){
-      this.props.addNews(this.state);
-      // this.setState({
-      //   news:{
-      //     title:'',
-      //     text:'',
-      //     author:'',
-      //     date:0
-      //   }
-      // })
+    if (title.trim() && text.trim() && author.trim()) {
+      this.props.addNews(this.state.news);
     }
   };
 
   handleInput = (event) => {
     const {name, value} = event.target;
-    this.setState(prevState => ({news: { ...prevState.news, [name]: value }}));
+    this.setState(prevState => ({news: {...prevState.news, [name]: value}}));
   };
 
   toggleModal = () => {
