@@ -3,41 +3,41 @@ import React, { Component } from 'react';
 class FormAddNews extends Component {
 
     render() {
-        const {handleInput, addNews, onClose} = this.props;
+        const {news: {title, text, author, date}, handleInput, AddNews, onClose} = this.props;
         return (
             <div className="FormAdd">
                 <form>
                     <input
                         name="title"
                         type="text"
-                        // value={text}
+                        value={title}
                         onChange={handleInput}
                         placeholder="Title"
                     />
                     <textarea
                         name="text"
-                        // value={information}
+                        value={text}
                         onChange={handleInput}
                         placeholder="Text"
                     />
                     <input
                         name="date"
                         type="datetime"
-                        // value={coordinates}
+                        value={date}
                         onChange={handleInput}
                         placeholder="Date"
                     />
                     <input
                         name="author"
                         type="text"
-                        // value={coordinates}
+                        value={author}
                         onChange={handleInput}
                         placeholder="Author"
                     />
                     <div className="buttons">
                         <button
                             type="submit"
-                            onClick={addNews}
+                            onClick={AddNews}
                             className={'Добавить'}
                         >
                             Добавить

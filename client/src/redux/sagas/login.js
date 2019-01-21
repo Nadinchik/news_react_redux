@@ -9,7 +9,8 @@ function* login({username, password}) {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'set-Cookie': ''
       },
       body: JSON.stringify({
         username: username,
@@ -17,9 +18,8 @@ function* login({username, password}) {
       }),
     });
     console.log('dataLogin -->', data);
-
     yield put(loginActions.loginSuccess(data.user));
-    // localStorage.setItem('isLogged', true);
+
   } catch (e) {
     yield put(loginActions.loginFail(e.statusText))
   }

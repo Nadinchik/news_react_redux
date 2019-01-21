@@ -36,29 +36,29 @@ passport.use('local', new LocalStrategy({
   },
 ));
 
-// router.post('/',
-//   passport.authenticate('local', {failureRedirect: '/'}),
-//   function (req, res) {
-//     res.send({user: req.user});
-//   });
+router.post('/',
+  passport.authenticate('local', {failureRedirect: '/'}),
+  function (req, res) {
+    res.send({user: req.user});
+  });
 
-router.post('/login', function(req, res, next) {
-  passport.authenticate('local',  function(err, user, info) {
-    if (err) { return next(err); }
-
-    console.log('Post--- user -->', user);
-
-    if (!user) { return res.send({message:'User'}); }
-
-    req.logIn(user, function(err) {
-
-      console.log('Post--- user-->',  user);
-
-      if (err) { return next(err); }
-      return res.send({user});
-    });
-  })(req, res, next);
-});
+// router.post('/login', function(req, res, next) {
+//   passport.authenticate('local',  function(err, user, info) {
+//     if (err) { return next(err); }
+//
+//     console.log('Post--- user -->', user);
+//
+//     if (!user) { return res.send({message:'User'}); }
+//
+//     req.logIn(user, function(err) {
+//
+//       console.log('Post--- user-->',  user);
+//
+//       if (err) { return next(err); }
+//       return res.send({user});
+//     });
+//   })(req, res, next);
+// });
 
 
 // router.post('/', (req, res, next) => {
