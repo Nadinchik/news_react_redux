@@ -5,6 +5,7 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require("body-parser");
 let logger = require('morgan');
 
+
 let db = require('./db/db');
 let model = require('./models/User_model');
 const User = require('mongoose').model('users');
@@ -14,19 +15,10 @@ let userRouter = require('./routes/user');
 let signUpRouter = require('./routes/signUp');
 let loginRouter = require('./routes/login');
 let googleRouter = require('./routes/google');
-let expressSession = require('express-session');
+let session = require('express-session');
+// let MongoDBStore = require('connect-mongodb-session')(session);
 
 let app = express();
-
-// passport.serializeUser(function (user, done) {
-//   done(null, user.id);
-// });
-//
-// passport.deserializeUser(function (id, done) {
-//   User.findById(id)
-//     .then(user => done(null, user))
-//     .catch(done);
-// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,8 +30,20 @@ app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: "mySecretKey"}));
+// app.use(session({
+//   store: new MongoDBStore({
+//     url: 'mongodb://localhost/news'
+//   }),
+//   secret: 'mySecretKey',
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24 * 7
+//   },
+//   resave: false,
+//   saveUninitialized: false
+// }));
 
-app.use(expressSession({secret: 'mySecretKey'}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 

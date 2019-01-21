@@ -22,10 +22,19 @@ class News extends Component {
     }
   }
 
+  // const guid = () => {
+  //   function s4() {
+  //     return Math.floor((1 + Math.random()) * 0x10000)
+  //       .toString(16)
+  //       .substring(1);
+  //   }
+  //   return s4() + s4() + '-' + s4();
+  // };
+
   AddNews = (e) => {
     e.preventDefault();
-    const {news: {title, text, author, date}} = this.state;
-    if(title.trim() && text.trim() && author.trim() && date.trim()){
+    const {news: {title, text, author}} = this.state;
+    if(title.trim() && text.trim() && author.trim() ){
       this.props.addNews(this.state);
       this.setState({
         news:{
