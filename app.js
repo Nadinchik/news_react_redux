@@ -31,6 +31,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: "mySecretKey"}));
+
 // app.use(session({
 //   store: new MongoDBStore({
 //     url: 'mongodb://localhost/news'
@@ -54,15 +55,6 @@ app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/google', googleRouter);
 
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.findById(id)
-    .then(user => done(null, user))
-    .catch(done);
-});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

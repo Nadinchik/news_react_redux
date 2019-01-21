@@ -5,7 +5,7 @@ import {Redirect} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 
 import * as loginActions from "../../redux/actions/login";
-import {PostData} from "../../components/services/PostData";
+// import {PostData} from "../../components/services/PostData";
 
 class Login extends Component {
   constructor(props) {
@@ -20,6 +20,8 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    localStorage.getItem('idUser');
+    console.log(' -->', localStorage.getItem('idUser'));
     fetch('/', {
       method: 'GET',
       headers: {
@@ -28,7 +30,6 @@ class Login extends Component {
       }
     })
        .then(result => {
-         console.log('result.userData -->', result.data);
          return result.data});
         // this.setState({ });
       };

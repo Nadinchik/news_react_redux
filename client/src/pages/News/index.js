@@ -6,6 +6,7 @@ import ModalWindow from "../../components/Modal";
 import FormAddNews from "../../components/FormAddNews"
 import SearchInput from '../../components/SearchInput'
 import {addNews} from "../../redux/actions/news";
+import NewsList from "../../components/NewsList";
 
 class News extends Component {
   constructor(props) {
@@ -36,14 +37,14 @@ class News extends Component {
     const {news: {title, text, author}} = this.state;
     if(title.trim() && text.trim() && author.trim() ){
       this.props.addNews(this.state);
-      this.setState({
-        news:{
-          title:'',
-          text:'',
-          author:'',
-          date:0
-        }
-      })
+      // this.setState({
+      //   news:{
+      //     title:'',
+      //     text:'',
+      //     author:'',
+      //     date:0
+      //   }
+      // })
     }
   };
 
@@ -82,16 +83,9 @@ class News extends Component {
             onClick={this.toggleModal}>
             Добавить новость
           </button>
-          <ul>
-            {this.props.news.map((news, index) =>
-              <li key={index}>
-                <h2>{news.title}</h2>
-                <p>{news.text}</p>
-                <span>{news.author}</span>
-                <h5>Creation date: {news.date}</h5>
-              </li>
-            )}
-          </ul>
+          <NewsList
+            news={news}
+          />
         </div>
 
         <ModalWindow

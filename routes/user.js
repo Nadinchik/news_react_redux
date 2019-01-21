@@ -1,14 +1,14 @@
 let express = require('express');
 let router = express.Router();
+const passport = require('passport');
+const userMiddleware = require('../middleware/login');
 
-router.get('/user', (req, res, next) => {
-  console.log('===== user!!======');
-  console.log(req.user);
-  if (req.user) {
-    return res.json({ user: req.user })
-  } else {
-    return res.json({ user: null })
-  }
-});
+passport.userMiddleware = userMiddleware;
+
+router.get('/',
+  passport.userMiddleware,
+  function (req, res, next) {
+    res.send({user: req.user});
+  });
 
 module.exports=router;

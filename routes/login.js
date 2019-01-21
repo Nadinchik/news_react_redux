@@ -4,7 +4,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 let encryptPassword = require('../utils/encryptPassword');
 
-// const loginMiddleware = require('../middleware/login');
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
@@ -34,7 +33,6 @@ passport.use('local', new LocalStrategy({
       }
       return done(null, user);
     });
-    // passport.loginMiddleware = loginMiddleware
   },
 ));
 
@@ -42,18 +40,11 @@ router.post('/',
   passport.authenticate('local', {failureRedirect: '/'}),
   function (req, res) {
     res.send({user: req.user});
-    console.log('req.credential -->', req.credential);
-    req.credential
   });
 
 
 router.get('/', function (req, res, next) {
   res.send({user: req.user});
 });
-
-// router.get('/', passport.loginMiddleware, function (req, res, next) {
-//   res.send({user: req.user});
-//   });
-
 
 module.exports = router;

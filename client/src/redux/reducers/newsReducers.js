@@ -17,13 +17,16 @@ const intialState = {
 };
 
 function newsReducer(state = intialState, action) {
-  if (action.type === 'ADD_NEWS') {
-    return {
-      ...state,
-      news: [...state.news, action.payload],
+  switch (action.type) {
+    case 'ADD_NEWS':{
+      return {
+        ...state,
+        news: action.payload,
+      }
     }
+    default:
+      return state;
   }
-  return state;
 }
 
 export default newsReducer;
