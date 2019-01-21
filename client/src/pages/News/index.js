@@ -16,7 +16,7 @@ class News extends Component {
       news:{
         title: '',
         text: '',
-        date: 0,
+        date: new Date(),
         author: '',
       }
     }
@@ -88,7 +88,7 @@ class News extends Component {
                 <h2>{news.title}</h2>
                 <p>{news.text}</p>
                 <span>{news.author}</span>
-                <h5>{news.date}</h5>
+                <h5>Creation date: {news.date}</h5>
               </li>
             )}
           </ul>

@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
@@ -7,10 +7,11 @@ import {GoogleLogin} from 'react-google-login';
 import * as loginActions from "../../redux/actions/login";
 import {PostData} from "../../components/services/PostData";
 
-class Login extends PureComponent {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: {},
       username: '',
       password: '',
       isLoading: false,
@@ -18,19 +19,34 @@ class Login extends PureComponent {
     };
   }
 
-  signup = (res, type) => {
-    let postData;
-    if (type === 'google' && res.w3.username) {
-      postData = { fullName: res.w3.ig, provider: type, username: res.w3.u3, provider_id: res.EL}
-    }
-    PostData('signUp', postData).then((result) => {
-      let responseJson = result;
-      if (responseJson.data) {
-        sessionStorage.setItem('users', JSON.stringify(responseJson));
-        this.setState({redirect: true});
+  componentDidMount() {
+    fetch('/', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
     })
-  };
+       .then(result => {
+         console.log('result.userData -->', result.data);
+         return result.data});
+        // this.setState({ });
+      };
+
+
+  // signup = (res, type) => {
+  //   let postData;
+  //   if (type === 'google' && res.w3.username) {
+  //     postData = { fullName: res.w3.ig, provider: type, username: res.w3.u3, provider_id: res.EL}
+  //   }
+  //   PostData('signUp', postData).then((result) => {
+  //     let responseJson = result;
+  //     if (responseJson.data) {
+  //       sessionStorage.setItem('users', JSON.stringify(responseJson));
+  //       this.setState({redirect: true});
+  //     }
+  //   })
+  // };
 
   handleChange = (event) => {
     const {name, value} = event.target;

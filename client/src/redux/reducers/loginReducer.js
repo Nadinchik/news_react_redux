@@ -12,8 +12,9 @@ const loginReducer = (state = intialState, action) => {
       };
     }
     case 'LOGIN_SUCCESS': {
+      console.log('action.data -->', action.data);
       return {
-        userData: {},
+        userData: action.data,
         error: false
       };
     }

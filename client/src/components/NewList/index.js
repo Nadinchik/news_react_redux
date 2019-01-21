@@ -1,11 +1,10 @@
 // import React, {Component} from 'react'
 //
-//
 // class NewsList extends Component {
-//
 //   render() {
-//     const {news} = this.props;
-//     const ListNews = news.map((item) => (
+//     // const {news} = this.props;
+//     console.log('this.props -->', this.props);
+//     const ListNews = this.props.news.map((item) => (
 //       <div className="card">
 //         <div className="card-header">
 //           {item.title}

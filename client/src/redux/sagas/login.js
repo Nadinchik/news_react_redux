@@ -7,19 +7,19 @@ function* login({username, password}) {
   try {
     const data = yield call(API, '/login', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'set-Cookie': ''
       },
       body: JSON.stringify({
         username: username,
         password: password,
       }),
     });
-    console.log('dataLogin -->', data);
+    console.log('dataLogin -->', data.user);
     yield put(loginActions.loginSuccess(data.user));
-
+    localStorage.setItem('idUser', data.user._id);
   } catch (e) {
     yield put(loginActions.loginFail(e.statusText))
   }

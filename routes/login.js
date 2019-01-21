@@ -42,6 +42,8 @@ router.post('/',
   passport.authenticate('local', {failureRedirect: '/'}),
   function (req, res) {
     res.send({user: req.user});
+    console.log('req.credential -->', req.credential);
+    req.credential
   });
 
 
