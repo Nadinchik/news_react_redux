@@ -4,6 +4,7 @@ const intialState = {
 };
 
 const signUpReducer = (state = intialState, action) => {
+
   switch (action.type) {
     case 'SIGN_UP_USER_REQUEST': {
       return {
@@ -13,7 +14,7 @@ const signUpReducer = (state = intialState, action) => {
     }
     case 'SIGN_UP_USER_SUCCESS': {
       return {
-        userData: {},
+        userData: action.data,
         error: false
       };
     }

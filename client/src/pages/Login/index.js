@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {authorize} from "../../redux/actions/auth";
+import * as loginActions from "../../redux/actions/login";
 
-class Login extends PureComponent {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,15 +14,22 @@ class Login extends PureComponent {
     };
   }
 
+  onSubmit = (e) => {
+    e.preventDefault();
+    const {username, password} = this.state;
+    const {login} = this.props;
+    login(username, password);
+    this.setState({
+      username:'',
+      password:''
+    })
+  };
+
   handleChange = (event) => {
     const {name, value} = event.target;
     this.setState({[name]: value});
   };
 
-  onSubmit = () => {
-    const {username, password} = this.state;
-    this.props.authorize(username, password);
-  };
 
   render() {
     const {username, password, isLoading} = this.state;
@@ -82,12 +89,11 @@ class Login extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  token: state.authReducer.token,
-  error: state.authReducer.error
+  error: state.loginReducer.error
 });
 
-const mapDispatchToProps = {
-  authorize,
-};
+const mapDispatchToProps = (dispatch) => ({
+  login: (username, password) => dispatch(loginActions.loginRequest(username, password)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -51,7 +51,6 @@ class Registration extends Component {
                   type="text"
                   name="fullName"
                   className="form-control username"
-                  // id="formGroupExampleInput"
                   placeholder="Full name"
                   value={fullName}
                   onChange={this.handleChange}
@@ -63,7 +62,6 @@ class Registration extends Component {
                   type="text"
                   name="username"
                   className="form-control username"
-                  // id="formGroupExampleInput"
                   value={username}
                   onChange={this.handleChange}
                   placeholder="Username/email"
@@ -75,7 +73,6 @@ class Registration extends Component {
                   type="password"
                   name='password'
                   className="form-control password"
-                  // id="formGroupExampleInput2"
                   value={password}
                   onChange={this.handleChange}
                   placeholder="Password"

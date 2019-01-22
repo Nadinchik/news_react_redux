@@ -1,41 +1,32 @@
-import { call, put, all, takeLatest } from 'redux-saga/effects';
-import { AUTH_REQUEST, AUTH_FAIL, AUTH_SUCCESS } from "../reducers/authReducer";
-import API from "./services";
+import {call, put, all, takeLatest} from 'redux-saga/effects';
+import * as loginActions from "../actions/login";
+import API from "../sagas/services";
 
-
-function* authorize({payload: {identifier, password}}) {
-  const options = {
-    body: JSON.stringify({identifier, password}),
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-
-  };
-
-  try {
-    const {token} = yield call(API, '/login', options);
-    yield put({type: 'AUTH_SUCCESS', payload: token});
-    localStorage.setItem('token', token);
-  } catch (error) {
-    let message;
-    switch (error.status) {
-      case 500:
-        message = 'Internal server error';
-        break;
-      case 401:
-        message = 'Invalid credentials';
-        break;
-      default:
-        message = 'Something went wrong';
+function* login({username, password}) {
+    console.log('usernameLogin, passwordLogin -->', username, password);
+    try {
+        const data = yield call(API, '/login', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        });
+        console.log('dataLogin -->', data.user);
+        yield put(loginActions.loginSuccess(data.user));
+        localStorage.setItem('idUser', data.user._id);
+    } catch (e) {
+        yield put(loginActions.loginFail(e.statusText))
     }
-    yield put({type: 'AUTH_FAIL', payload: message});
-    localStorage.removeItem('token');
-  }
-}
+};
 
-function* mySaga() {
-  yield all([
-    takeLatest('AUTH_REQUEST', authorize),
-  ]);
+export default function* loginSaga() {
+    yield all([
+        takeLatest('LOGIN_REQUEST', login),
+    ]);
 }
-
-export default mySaga;

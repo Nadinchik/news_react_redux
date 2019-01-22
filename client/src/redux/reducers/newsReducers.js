@@ -1,11 +1,11 @@
 const intialState = {
-  news: [
+  posts: [
     {
-      "id": "56c782f1978fdf9a0100df52",
-      "date": "2016-06-02T11:03:23.000Z",
-      "title": "Hello my new world",
-      "author": "Ivan Ivanovich",
-      "text": "Culpa dolor deserunt veniam irure amet officia excepteur labore nisi labore ad labore laborum aute. Ea irure sit exercitation ex. " +
+      id: "56c782f1978fdf9a0100df52",
+      date: "2016-06-02T11:03:23.000Z",
+      title: "Hello my new world",
+      author: "Ivan Ivanovich",
+      text: "Culpa dolor deserunt veniam irure amet officia excepteur labore nisi labore ad labore laborum aute. Ea irure sit exercitation ex. " +
         "Aliquip dolore duis ullamco labore qui. Et anim irure laborum quis ipsum. Adipisicing culpa est ea velit veniam dolor nisi. Sit cupidatat velit " +
         "commodo eu.\n\nUt nulla ut irure cillum irure sint sunt cupidatat tempor laboris incididunt elit occaecat fugiat. Reprehenderit enim cupidatat consectetur " +
         "pariatur ad pariatur consequat veniam do fugiat Lorem laborum do velit. Nulla aute magna magna nisi officia et. Aute adipisicing eu eiusmod tempor exercitation " +
@@ -17,13 +17,16 @@ const intialState = {
 };
 
 function newsReducer(state = intialState, action) {
-  if (action.type === 'ADD_NEWS') {
-    return {
-      ...state,
-      news: [...state.news, action.payload],
+  switch (action.type) {
+    case 'ADD_NEWS':{
+      return {
+        ...state,
+        posts: action.payload,
+      }
     }
+    default:
+      return state;
   }
-  return state;
 }
 
 export default newsReducer;
