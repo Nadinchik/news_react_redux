@@ -6,7 +6,7 @@ import SearchInput from 'react-search-input';
 
 import ModalWindow from "../../components/Modal";
 import FormAddNews from "../../components/FormAddNews"
-import * as newsActions from "../../redux/actions/news";
+import {addNews} from "../../redux/actions/news";
 import NewsList from "../../components/NewsList";
 
 // const KEYS_TO_FILTERS = ['posts.title', 'posts.text', 'posts.author'];
@@ -41,16 +41,8 @@ class News extends Component {
     AddNews = (e) => {
         e.preventDefault();
         const {posts: {title, text, author}} = this.state;
-        const {news} = this.props;
-        news({posts: {title, text, author}});
         if (title.trim() && text.trim() && author.trim()) {
-            this.setState({
-                posts: {
-                    title:'',
-                    text:'',
-                    author:''
-                }
-            })
+            this.props.addNews(this.state);
         }
     };
 
@@ -126,8 +118,8 @@ const mapStateToProps = state => ({
     posts: state.newsReducer.posts,
 });
 
-const mapDispatchToProps = (dispatch)=> ({
-   news: ({posts: {title, text, author}}) => dispatch(newsActions.addNews({posts: {title, text, author}))
+const mapDispatchToProps = ()=> ({
+    addNews
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);
