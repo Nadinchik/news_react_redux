@@ -29,8 +29,13 @@ class FormAddNews extends Component {
         })
     };
 
+    handleInput = (event) => {
+        const {name, value} = event.target;
+        this.setState( { [name]: value});
+    };
+
     render() {
-        const {handleInput, onClose} = this.props;
+        const { onClose, isError} = this.props;
         const {title, text, author, date} = this.state;
         return (
             <div className="FormAdd">
@@ -39,27 +44,26 @@ class FormAddNews extends Component {
                         name="title"
                         type="text"
                         value={title}
-                        onChange={handleInput}
+                        onChange={this.handleInput}
                         placeholder="Title"
                     />
                     <textarea
                         name="text"
                         value={text}
-                        onChange={handleInput}
+                        onChange={this.handleInput}
                         placeholder="Text"
                     />
                     <input
                         name="date"
                         type="datetime"
                         value={date}
-                        onChange={handleInput}
                         placeholder="Date"
                     />
                     <input
                         name="author"
                         type="text"
                         value={author}
-                        onChange={handleInput}
+                        onChange={this.handleInput}
                         placeholder="Author"
                     />
                     <div className="buttons">
@@ -71,9 +75,9 @@ class FormAddNews extends Component {
                             Добавить
                         </button>
                     </div>
-                    {/*{(isError) &&*/}
-                    {/*<p className="validationForm">Поля не должны быть пустыми</p>*/}
-                    {/*}*/}
+                    {(isError) &&
+                    <p className="validationForm">Поля не должны быть пустыми</p>
+                    }
 
                     <button
                         type="button"

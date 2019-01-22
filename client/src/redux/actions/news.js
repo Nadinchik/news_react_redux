@@ -1,34 +1,40 @@
-// export const addNews = (payload) =>({
-//     type:"ADD_NEWS",
-//     payload
-// });
-//
-// export const initNews = (payload) =>({
-//     type:"INIT_NEWS",
-//     payload
-// });
 
-export const deleteNews = (payload)=>({
-    type:'DELETE_NEWS',
-    payload
+export const addNewSuccess = (array) => ({
+    type: 'ADD_NEWS_SUCCESS',
+    array
 });
 
-export const editNews = (payload)=>({
-    type:'EDIT_NEWS',
-    payload
+export const addNewRequest = (data) => ({
+    type: 'ADD_NEWS_REQUEST',
+    data
 });
 
-export const newsRequest = (payload) => ({
+export const addNewFail = (error) => ({
+    type: 'ADD_NEWS_FAIL',
+    error
+});
+
+export const deleteNews = (array) => ({
+    type: 'DELETE_NEWS',
+    array
+});
+
+export const editNews = (array) => ({
+    type: 'EDIT_NEWS',
+    array
+});
+
+export const newsRequest = (data) => ({
     type: 'NEWS_REQUEST',
-    payload
+    data
 });
 
-export const newsSuccess = (payload) =>({
-    type:'NEWS_SUCCESS',
-    payload
+export const newsSuccess = (array) => ({
+    type: 'NEWS_SUCCESS',
+    array
 });
 
-export const newsFail = (error) =>({
+export const newsFail = (error) => ({
     type: 'NEWS_FAIL',
     error
 });

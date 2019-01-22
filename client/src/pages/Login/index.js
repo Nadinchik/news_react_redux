@@ -65,17 +65,6 @@ class Login extends Component {
     this.setState({[name]: value});
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    const {username, password} = this.state;
-    const {login} = this.props;
-    login(username, password);
-    this.setState({
-      username: '',
-      password: ''
-    })
-  };
-
 
   render() {
     const {username, password, isLoading} = this.state;

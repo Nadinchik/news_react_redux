@@ -16,7 +16,7 @@ class News extends Component {
         super(props);
         this.state = {
             isOpen: false,
-            isEdit: false,
+            isError: true,
             searchTerm: '',
             value: '',
             posts: [],
@@ -25,29 +25,12 @@ class News extends Component {
         this.searchUpdated = this.searchUpdated.bind(this)
     }
 
-    // const guid = () => {
-    //   function s4() {
-    //     return Math.floor((1 + Math.random()) * 0x10000)
-    //       .toString(16)
-    //       .substring(1);
-    //   }
-    //   return s4() + s4() + '-' + s4();
-    // };
-
     AddPost = (e) => {
         e.preventDefault();
         const {post} = this.state;
-        const {news} = this.props;
-        news(post);
-        this.setState({
-            post
-        })
-
-    };
-
-    handleInput = (event) => {
-        const {name, value} = event.target;
-        this.setState(prevState => ({post: {...prevState.post, [name]: value}}));
+        const {add} = this.props;
+        add(post);
+        this.setState({post})
     };
 
     toggleModal = () => {
@@ -63,7 +46,7 @@ class News extends Component {
     // };
 
     render() {
-        const {isOpen, post, posts} = this.state;
+        const {isOpen, post, posts, isError} = this.state;
         console.log('post', post);
         return (
             <div className="container">
@@ -97,9 +80,9 @@ class News extends Component {
                     handleOpen={this.toggleModal}
                 >
                     <FormAddNews
-                        handleInput={this.handleInput}
                         onSubmit={this.props.AddPost}
                         onClose={this.toggleModal}
+                        iserror={isError}
                     />
                 </ModalWindow>
             </div>
@@ -114,10 +97,11 @@ class News extends Component {
 
 const mapStateToProps = state => ({
     post: state.newsReducer.post,
+    error: state.newsReducer.error
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    news: (post) => dispatch(newsActions.newsRequest(post))
+    add: (post) => dispatch(newsActions.newsRequest(post))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

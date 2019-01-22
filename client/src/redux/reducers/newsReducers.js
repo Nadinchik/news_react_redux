@@ -48,10 +48,9 @@ function newsReducer(state = intialState, action) {
         case 'NEWS_FAIL': {
             return {
                 news: [],
-                error: true
+                error: action.error
             }
         }
-
         default:
             return state;
     }
