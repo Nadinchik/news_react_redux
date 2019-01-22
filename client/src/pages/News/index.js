@@ -6,7 +6,7 @@ import SearchInput from 'react-search-input';
 
 import ModalWindow from "../../components/Modal";
 import FormAddNews from "../../components/FormAddNews"
-import {addNews} from "../../redux/actions/news";
+import * as newsActions from "../../redux/actions/news";
 import NewsList from "../../components/NewsList";
 
 // const KEYS_TO_FILTERS = ['posts.title', 'posts.text', 'posts.author'];
@@ -41,8 +41,16 @@ class News extends Component {
     AddNews = (e) => {
         e.preventDefault();
         const {posts: {title, text, author}} = this.state;
+        const {news} = this.props;
+        news({posts: {title, text, author}});
         if (title.trim() && text.trim() && author.trim()) {
-            this.props.addNews(this.state);
+            this.setState({
+                posts: {
+                    title:'',
+                    text:'',
+                    author:''
+                }
+            })
         }
     };
 
@@ -65,7 +73,6 @@ class News extends Component {
 
     render() {
         const {isOpen, posts} = this.state;
-        // const filteredNews = posts.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
         console.log('posts', posts);
         return (
             <div className="container">
@@ -73,23 +80,8 @@ class News extends Component {
                     <h1 className="display-3">
                         Новости
                     </h1>
-                    {/*<input type="text" value={this.props.value} onChange={this.handleChange} />*/}
-                    {/*<SearchField*/}
-                    {/*placeholder="Search..."*/}
-                    {/*onChange={this.handleChange}*/}
-                    {/*classNames="test-class"*/}
-                    {/*/>*/}
                     <div>
                         <SearchInput className="search-input" onChange={this.searchUpdated}/>
-                        {/*{filteredNews.map(posts => {*/}
-                            {/*return (*/}
-                                {/*<div className="news" key={posts.id}>*/}
-                                    {/*<div className="title">{posts.title}</div>*/}
-                                    {/*<div className="text">{posts.text}</div>*/}
-                                    {/*<div className="author">{posts.author}</div>*/}
-                                {/*</div>*/}
-                            {/*)*/}
-                        {/*})}*/}
                     </div>
                     <div className="LinkGo">
                         <Link to="/login">Login</Link>
@@ -129,13 +121,13 @@ class News extends Component {
     }
 }
 
+
 const mapStateToProps = state => ({
     posts: state.newsReducer.posts,
 });
 
-const mapDispatchToProps = {
-    addNews
-};
-
+const mapDispatchToProps = (dispatch)=> ({
+   news: ({posts: {title, text, author}}) => dispatch(newsActions.addNews({posts: {title, text, author}))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

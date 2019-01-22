@@ -18,6 +18,7 @@ function* login({username, password}) {
             }),
         });
         console.log('dataLogin -->', data.user);
+
         yield put(loginActions.loginSuccess(data.user));
         localStorage.setItem('idUser', data.user._id);
     } catch (e) {
@@ -28,5 +29,5 @@ function* login({username, password}) {
 export default function* loginSaga() {
     yield all([
         takeLatest('LOGIN_REQUEST', login),
-    ]);
+    ])
 }

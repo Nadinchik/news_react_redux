@@ -8,8 +8,6 @@ const User = require('mongoose').model('users');
 
 passport.use('local-signup', new LocalStrategy({
         passReqToCallback: true,
-        usernameField: 'username',
-        passwordField: 'password',
     },
     function (req, username, password, done) {
 
@@ -41,6 +39,13 @@ router.post('/',
         console.log('req.user -->', req.user);
         res.send({user: req.user});
     });
+
+// router.get('/logout',(req,res)=>{
+//   req.logout();
+//   req.flash('Logout Successfully');
+//   res.redirect('/signUp')
+// });
+
 
 // router.get('/logout',(req,res)=>{
 //   req.logout();

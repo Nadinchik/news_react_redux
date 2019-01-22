@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class FormAddNews extends Component {
 
     render() {
-        const {handleInput, addNews, onClose, posts:{title, text, data, author}} = this.props;
+        const {handleInput, AddNews, onClose, posts:{title, text, date, author}} = this.props;
         return (
             <div className="FormAdd">
                 <form>
@@ -23,7 +23,7 @@ class FormAddNews extends Component {
                     <input
                         name="date"
                         type="datetime"
-                        value={data}
+                        value={date}
                         onChange={handleInput}
                         placeholder="Date"
                     />
@@ -37,7 +37,7 @@ class FormAddNews extends Component {
                     <div className="buttons">
                         <button
                             type="submit"
-                            onClick={addNews}
+                            onClick={AddNews}
                             className={'Добавить'}
                         >
                             Добавить

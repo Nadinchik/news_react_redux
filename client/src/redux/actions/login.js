@@ -1,3 +1,4 @@
+
 export const loginRequest = (username, password) => ({
     type: 'LOGIN_REQUEST',
     username,
@@ -13,3 +14,4 @@ export const loginFail = (error) =>({
     type: 'LOGIN_FAIL',
     error
 });
+

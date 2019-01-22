@@ -17,6 +17,10 @@ class User extends Component {
         }
     }
 
+    // componentDidMount() {
+    //     this.props.dispatch(userActions.getAll());
+    // }
+
     handleAddNews = () => {
         this.props.addNews({title: this.state.title})
     };
@@ -36,6 +40,7 @@ class User extends Component {
     render() {
         const {isOpen, news} = this.state;
         return (
+
             <div className="container">
                 <button
                     className="addButton"

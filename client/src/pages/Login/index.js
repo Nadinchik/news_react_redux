@@ -1,16 +1,22 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+import {GoogleLogin} from 'react-google-login';
 
 import * as loginActions from "../../redux/actions/login";
+// import {PostData} from "../../components/services/PostData";
+
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: {},
       username: '',
       password: '',
-      isLoading: false
+      isLoading: false,
+      redirect: false
     };
   }
 
@@ -25,16 +31,61 @@ class Login extends Component {
     })
   };
 
+  componentDidMount() {
+    localStorage.getItem('idUser');
+    console.log(' -->', localStorage.getItem('idUser'));
+    fetch('/', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+       .then(result => {
+         return result.data});
+        // this.setState({ });
+      };
+
+  // signup = (res, type) => {
+  //   let postData;
+  //   if (type === 'google' && res.w3.username) {
+  //     postData = { fullName: res.w3.ig, provider: type, username: res.w3.u3, provider_id: res.EL}
+  //   }
+  //   PostData('signUp', postData).then((result) => {
+  //     let responseJson = result;
+  //     if (responseJson.data) {
+  //       sessionStorage.setItem('users', JSON.stringify(responseJson));
+  //       this.setState({redirect: true});
+  //     }
+  //   })
+  // };
+
   handleChange = (event) => {
     const {name, value} = event.target;
     this.setState({[name]: value});
   };
 
+  onSubmit = (e) => {
+    e.preventDefault();
+    const {username, password} = this.state;
+    const {login} = this.props;
+    login(username, password);
+    this.setState({
+      username: '',
+      password: ''
+    })
+  };
+
 
   render() {
     const {username, password, isLoading} = this.state;
-    console.log('this.state -->', this.state);
+    const responseGoogle = (response) => {
+      console.log(response);
+    };
 
+    if (this.state.redirect) {
+      return (<Redirect to={'/'} />)
+    }
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">
@@ -45,6 +96,14 @@ class Login extends Component {
             LOGIN
           </div>
           <div className='auth'>
+
+            <GoogleLogin
+              clientId="932534981003-thcpid6t7bcarjhhbadhh2ctf0tqu93b.apps.googleusercontent.com"
+              buttonText="Login with Google"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+            />
+
             <form method="post">
               <div className="form-group">
                 <label htmlFor="formGroupExampleInput">Username</label>
@@ -55,7 +114,7 @@ class Login extends Component {
                   id="formGroupExampleInput"
                   value={username}
                   onChange={this.handleChange}
-                  placeholder="Username/email"
+                  placeholder="Username"
                 />
               </div>
               <div className="form-group">

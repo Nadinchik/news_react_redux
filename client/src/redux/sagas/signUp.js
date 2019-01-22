@@ -20,11 +20,15 @@ function* signUp({fullName, username, password}) {
     console.log('data -->', data);
 
     yield put(signUpActions.signUpSuccess(data.user));
-    localStorage.setItem('isLogged', true);
+    localStorage.setItem('isLogged', 'true');
   } catch (e) {
     yield put(signUpActions.signUpFail(e.statusText))
   }
-};
+  console.log('username -->', username);
+  // logout(callback){
+  //   localStorage.removeItem('isLogged');
+  // }
+}
 
 export default function* signUpSaga() {
   yield all([

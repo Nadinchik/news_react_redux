@@ -9,6 +9,7 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^4.2.1",
     "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^2.0.6",
     "cookie-parser": "~1.4.3",
     "crypto": "^1.0.1",
     "debug": "~2.6.9",
@@ -19,6 +20,7 @@
     "mongoose": "^5.4.4",
     "morgan": "~1.9.0",
     "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "pug": "2.0.0-beta11",
@@ -32,6 +34,6 @@
     "reactstrap": "^7.1.0",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
-    "sass": "^1.16.0"
+    "sass": "^1.16.1"
   }
 }

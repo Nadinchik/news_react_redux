@@ -53,7 +53,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
-app.use('/google', googleRouter);
+// app.use('/google', googleRouter);
 
 
 // catch 404 and forward to error handler
@@ -79,7 +79,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
-app.use('/google', googleRouter);
+// app.use('/google', googleRouter);
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

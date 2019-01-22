@@ -22,5 +22,4 @@ const newsItem = ({item}) => {
     )
 };
 
-
 export default newsItem;
