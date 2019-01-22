@@ -1,9 +1,37 @@
 import React, { Component } from 'react';
 
 class FormAddNews extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            title:'',
+            text:'',
+            author:'',
+            date:0
+        }
+    }
+
+    handleSubmit = () => {
+        const {title, text, author, date} = this.state;
+        const {onSubmit} = this.props;
+        const data={
+            title,
+            text,
+            date,
+            author
+        };
+        onSubmit(data);
+        this.setState({
+            title:'',
+            text:'',
+            author:'',
+            date:0
+        })
+    };
 
     render() {
-        const {handleInput, AddNews, onClose, posts:{title, text, date, author}} = this.props;
+        const {handleInput, onClose} = this.props;
+        const {title, text, author, date} = this.state;
         return (
             <div className="FormAdd">
                 <form>
@@ -37,7 +65,7 @@ class FormAddNews extends Component {
                     <div className="buttons">
                         <button
                             type="submit"
-                            onClick={AddNews}
+                            onClick={this.handleSubmit}
                             className={'Добавить'}
                         >
                             Добавить

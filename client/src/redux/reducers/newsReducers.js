@@ -19,31 +19,17 @@ const intialState = {
 
 function newsReducer(state = intialState, action) {
     switch (action.type) {
-        case 'ADD_NEWS': {
+        case 'DELETE_NEWS': {
             return {
                 ...state,
                 news: action.payload,
                 error: false
             }
         }
-        case 'INIT_NEWS': {
-            return {
-                ...state,
-                news: [],
-                error: false
-            }
-        }
-        case 'DELETE_NEWS': {
-            return {
-                ...state,
-                news: filter((post) => post.id !== action.id),
-                error: false
-            }
-        }
         case 'EDIT_NEWS': {
             return {
                 ...state,
-                news: state.map((post) => post.id === action.id ? {...post, editing: !post.editing} : post),
+                news: action.payload,
                 error: false
             }
         }
@@ -55,14 +41,14 @@ function newsReducer(state = intialState, action) {
         }
         case 'NEWS_SUCCESS': {
             return {
-                news: action.data,
+                news: action.payload,
                 error: false
             }
         }
         case 'NEWS_FAIL': {
             return {
                 news: [],
-                error
+                error: true
             }
         }
 

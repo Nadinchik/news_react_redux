@@ -16,7 +16,7 @@ const NewsList = ({posts}) => {
 };
 
 NewsList.propTypes={
-    posts: PropTypes.arrayOf(PropTypes.object),
+    posts: PropTypes.arrayOf([PropTypes.object]),
 };
 
 NewsList.defaultTypes={

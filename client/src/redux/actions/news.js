@@ -1,12 +1,12 @@
-export const addNews = (payload) =>({
-    type:"ADD_NEWS",
-    payload
-});
-
-export const initNews = (payload) =>({
-    type:"INIT_NEWS",
-    payload
-});
+// export const addNews = (payload) =>({
+//     type:"ADD_NEWS",
+//     payload
+// });
+//
+// export const initNews = (payload) =>({
+//     type:"INIT_NEWS",
+//     payload
+// });
 
 export const deleteNews = (payload)=>({
     type:'DELETE_NEWS',
@@ -23,9 +23,9 @@ export const newsRequest = (payload) => ({
     payload
 });
 
-export const newsSuccess = (data) =>({
+export const newsSuccess = (payload) =>({
     type:'NEWS_SUCCESS',
-    data
+    payload
 });
 
 export const newsFail = (error) =>({

@@ -6,7 +6,7 @@ import SearchInput from 'react-search-input';
 
 import ModalWindow from "../../components/Modal";
 import FormAddNews from "../../components/FormAddNews"
-import {addNews} from "../../redux/actions/news";
+import * as newsActions from "../../redux/actions/news";
 import NewsList from "../../components/NewsList";
 
 // const KEYS_TO_FILTERS = ['posts.title', 'posts.text', 'posts.author'];
@@ -19,12 +19,8 @@ class News extends Component {
             isEdit: false,
             searchTerm: '',
             value: '',
-            posts: {
-                title: '',
-                text: '',
-                date: new Date(),
-                author: '',
-            }
+            posts: [],
+            post: {}
         };
         this.searchUpdated = this.searchUpdated.bind(this)
     }
@@ -38,17 +34,20 @@ class News extends Component {
     //   return s4() + s4() + '-' + s4();
     // };
 
-    AddNews = (e) => {
+    AddPost = (e) => {
         e.preventDefault();
-        const {posts: {title, text, author}} = this.state;
-        if (title.trim() && text.trim() && author.trim()) {
-            this.props.addNews(this.state);
-        }
+        const {post} = this.state;
+        const {news} = this.props;
+        news(post);
+        this.setState({
+            post
+        })
+
     };
 
     handleInput = (event) => {
         const {name, value} = event.target;
-        this.setState(prevState => ({posts: {...prevState.posts, [name]: value}}));
+        this.setState(prevState => ({post: {...prevState.post, [name]: value}}));
     };
 
     toggleModal = () => {
@@ -64,8 +63,8 @@ class News extends Component {
     // };
 
     render() {
-        const {isOpen, posts} = this.state;
-        console.log('posts', posts);
+        const {isOpen, post, posts} = this.state;
+        console.log('post', post);
         return (
             <div className="container">
                 <div className=''>
@@ -98,9 +97,8 @@ class News extends Component {
                     handleOpen={this.toggleModal}
                 >
                     <FormAddNews
-                        posts={posts}
                         handleInput={this.handleInput}
-                        AddNews={this.AddNews}
+                        onSubmit={this.props.AddPost}
                         onClose={this.toggleModal}
                     />
                 </ModalWindow>
@@ -115,11 +113,11 @@ class News extends Component {
 
 
 const mapStateToProps = state => ({
-    posts: state.newsReducer.posts,
+    post: state.newsReducer.post,
 });
 
-const mapDispatchToProps = ()=> ({
-    addNews
+const mapDispatchToProps = (dispatch) => ({
+    news: (post) => dispatch(newsActions.newsRequest(post))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);
