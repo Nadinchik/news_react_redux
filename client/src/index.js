@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import {BrowserRouter} from "react-router-dom";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import store from './store';
-import 'bootstrap/dist/css/bootstrap.min.css'
-// import './index.scss'
+// import './index.scss';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -15,7 +15,7 @@ ReactDOM.render(
     </BrowserRouter>
   </Provider>,
 
-    document.getElementById("root"),
+  document.getElementById('root'),
 );
 
 serviceWorker.unregister();

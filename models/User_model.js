@@ -1,6 +1,6 @@
 let crypto = require('crypto');
 let mongoose = require('mongoose');
-let encryptPassword = require('../utils/encryptPassword.');
+
 
 let schema = new mongoose.Schema({
   fullName: {
@@ -32,17 +32,17 @@ schema.methods.encryptPassword = function (password) {
 };
 
 schema.virtual('password')
-    .set(function (password) {
-      this._planPassword = password;
-      this.salt = Math.random() + '';
-      this.hashedPassword = this.encryptPassword(password);
-    })
-    .get(function () {
-      return this._planPassword;
-    });
+  .set(function (password) {
+    this._planPassword = password;
+    this.salt = Math.random() + '';
+    this.hashedPassword = this.encryptPassword(password);
+  })
+  .get(function () {
+    return this._planPassword;
+  });
 
 schema.methods.checkPassword = function (password) {
-  return this.checkPassword(password) === this.hashedPassword;
+  return this.encryptPassword(password) === this.hashedPassword;
 };
 
 
