@@ -8,7 +8,6 @@
     "connect-mongodb-session": "^2.0.6",
     "crypto": "^1.0.1",
     "fetch": "^1.1.0",
-    "node-sass": "^4.11.0",
     "passport-google-oauth": "^1.0.0",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",

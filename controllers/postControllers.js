@@ -2,45 +2,46 @@ let Post = require('../models/post_Model');
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
-const addPost = (req, idUser, done) => {
-    console.log('idUser --->', idUser);
-    User.findOne({idUser}, function(user, post, error) {
+const addPost = (req,  res) => {
+    const id = req.params.id;
+    User.findOne({_id: id}, function(error, user) {
             if (user) {
                 Post.save({
-                    idUser: req.params.idUser,
+                    idUser: req.params._id,
                     title: req.body.title,
                     text: req.body.text,
                 });
-                return done(user, post, null);
+                return res.send(null, user);
             }
             if (error) {
-                return done(error);
+                return res.send(error);
             }
         })
 };
 
 
-const getUsersPosts = (idUser, done) => {
-    Post.find({idUser}, function (user, posts, error) {
-            if (user) {
-                return done(user, posts, null)
+const getUsersPosts = (req, res) => {
+    const id = req.params.id;
+    User.findOne({_id:id}, function (error, posts) {
+            if (req.user._id === _id) {
+                return res.status(200).send(null, posts)
             }
             if (error) {
-                return done(error)
+                return res.send(error)
             }
         }
     )
 };
 
-const getAllPosts = (page, done) => {
+const getAllPosts = (req, res) => {
     Post.find({})
         .limit(5)
-        .exec(function (posts, error) {
+        .exec(function (error, posts) {
         if (posts) {
-            return done(posts, null)
+            return res.status(200).send(null, posts)
         }
         if (error) {
-            return done(error)
+            return res.send(error)
         }
     })
 };

@@ -31,34 +31,21 @@ class Login extends Component {
     })
   };
 
-  componentDidMount() {
-    localStorage.getItem('idUser');
-    console.log(' -->', localStorage.getItem('idUser'));
-    fetch('/', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-       .then(result => {
-         return result.data});
-        // this.setState({ });
-      };
-
-  // signup = (res, type) => {
-  //   let postData;
-  //   if (type === 'google' && res.w3.username) {
-  //     postData = { fullName: res.w3.ig, provider: type, username: res.w3.u3, provider_id: res.EL}
-  //   }
-  //   PostData('signUp', postData).then((result) => {
-  //     let responseJson = result;
-  //     if (responseJson.data) {
-  //       sessionStorage.setItem('users', JSON.stringify(responseJson));
-  //       this.setState({redirect: true});
+  // componentDidMount() {
+  //   localStorage.getItem('idUser');
+  //   console.log(' -->', localStorage.getItem('idUser'));
+  //   fetch('/', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
   //     }
   //   })
-  // };
+  //      .then(result => {
+  //        return result.data});
+  //       // this.setState({ });
+  //     };
+
 
   handleChange = (event) => {
     const {name, value} = event.target;
@@ -73,12 +60,12 @@ class Login extends Component {
     };
 
     if (this.state.redirect) {
-      return (<Redirect to={'/news'} />)
+      return (<Redirect to={'/'} />)
     }
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">
-          <Link to="/">Назад</Link>
+          <Link to="/news">Назад</Link>
         </div>
         <div className='formAuth mx-auto'>
           <div className='card-title'>

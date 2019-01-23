@@ -10,7 +10,6 @@ passport.use('local-signup', new LocalStrategy({
         passReqToCallback: true,
     },
     function (req, username, password, done) {
-
         User.findOne({username}, function (err, user) {
             if (err) {
                 return done(err);

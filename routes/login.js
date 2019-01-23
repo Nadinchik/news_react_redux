@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-// let encryptPassword = require('../utils/encryptPassword');
+let encryptPassword = require('../utils/encryptPassword.');
 
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
