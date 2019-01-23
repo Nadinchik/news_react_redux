@@ -1,4 +1,3 @@
-
 export const addNewSuccess = (array) => ({
     type: 'ADD_NEWS_SUCCESS',
     array
@@ -6,7 +5,7 @@ export const addNewSuccess = (array) => ({
 
 export const addNewRequest = (data) => ({
     type: 'ADD_NEWS_REQUEST',
-    data
+    data,
 });
 
 export const addNewFail = () => ({
@@ -15,24 +14,30 @@ export const addNewFail = () => ({
 
 export const deleteNews = (array) => ({
     type: 'DELETE_NEWS',
-    array
+    array,
 });
 
 export const editNews = (array) => ({
     type: 'EDIT_NEWS',
-    array
+    array,
 });
 
-export const newsRequest = (data) => ({
+export const newsRequest = (page) => ({
     type: 'NEWS_REQUEST',
-    data
+    page,
 });
 
 export const newsSuccess = (array) => ({
     type: 'NEWS_SUCCESS',
-    array
+    array,
 });
 
 export const newsFail = () => ({
     type: 'NEWS_FAIL',
+});
+
+export const getNewsByIdRequest = (idUser, page) => ({
+    type: 'NEWS_REQUEST',
+    idUser,
+    page,
 });

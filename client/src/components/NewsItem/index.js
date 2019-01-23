@@ -1,25 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const newsItem = ({item}) => {
-    console.log('item--->', item);
+
+const NewsItem = ({ data: { title, text, date } }) => {
+    if (!title && !text) return null;
     return (
-        <li>
-            <div className="card">
-                <div className="card-header">
-                    {item.title}
-                </div>
-                <div className="card-body">
-                    <section className="card-text">{item.text}</section>
-                    <div>
-                        {item.author}
-                    </div>
-                    <h6 className="card-subtitle text-muted">
-                        creation date: {item.date}
-                    </h6>
-                </div>
-            </div>
-        </li>
-    )
+      <li>
+          <div className="card">
+              <div className="card-header">
+                  {title && title}
+              </div>
+              <div className="card-body">
+                  <section className="card-text">{text && text}</section>
+                  <h6 className="card-subtitle text-muted">
+                      creation date: {date}
+                  </h6>
+              </div>
+          </div>
+      </li>
+    );
 };
 
-export default newsItem;
+
+export default NewsItem;

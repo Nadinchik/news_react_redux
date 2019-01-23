@@ -42,7 +42,7 @@ schema.virtual('password')
     });
 
 schema.methods.checkPassword = function (password) {
-  return this.encryptPassword(password) === this.hashedPassword;
+  return this.checkPassword(password) === this.hashedPassword;
 };
 
 

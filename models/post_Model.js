@@ -3,24 +3,21 @@ let db = require('../db/db');
 
 let schema = new mongoose.Schema({
     idUser: {
-        type: String
+        type: String,
     },
     title: {
-        type: String
+        type: String,
     },
     text: {
-        type: String
-    },
-    author: {
-        type: String
+        type: String,
     },
     date: {
         type: Date,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 });
 
 let Post = mongoose.model('post', schema);
 
-module.exports=Post;
+module.exports = Post;
 

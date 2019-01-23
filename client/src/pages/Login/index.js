@@ -5,6 +5,7 @@ import {Redirect} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 
 import * as loginActions from "../../redux/actions/login";
+
 // import {PostData} from "../../components/services/PostData";
 
 
@@ -26,8 +27,8 @@ class Login extends Component {
     const {login} = this.props;
     login(username, password);
     this.setState({
-      username:'',
-      password:''
+      username: '',
+      password: ''
     })
   };
 
@@ -60,7 +61,7 @@ class Login extends Component {
     };
 
     if (this.state.redirect) {
-      return (<Redirect to={'/'} />)
+      return (<Redirect to={'/news'}/>)
     }
     return (
       <div className='thead-light'>

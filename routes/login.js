@@ -2,7 +2,6 @@ let express = require('express');
 let router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-let encryptPassword = require('../utils/encryptPassword.');
 
 let model = require('../models/User_model');
 const User = require('mongoose').model('users');
@@ -24,11 +23,8 @@ passport.use('local', new LocalStrategy({
             if (!user) {
                 return done(null, false, {message: 'Incorrect username.'})
             }
-            console.log('-->user.hashedPassword', user.hashedPassword);
-            console.log('-->user.salt', user.salt);
-            console.log('-->encryptPassword(password, user.salt)', encryptPassword(password, user.salt));
-            console.log('-->isEqual passwords', user.hashedPassword !== encryptPassword(password, user.salt));
-            if (user.hashedPassword !== encryptPassword(password, user.salt)) {
+
+            if (!user.checkPassword(password)) {
                 return done(null, false, {message: 'Incorrect password.'})
             }
             return done(null, user);

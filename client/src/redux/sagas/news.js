@@ -1,8 +1,8 @@
-import {call, put, all, takeEvery} from 'redux-saga/effects';
-import * as newsActions from "../actions/news";
-import API from "../sagas/services";
+import { call, put, all, takeEvery } from 'redux-saga/effects';
+import * as newsActions from '../actions/news';
+import API from '../sagas/services';
 
-function* getNews({id}) {
+function* getNews({ id }) {
     try {
         const data = yield call(API, `/news/?id=${id}`, {
             method: 'GET',
@@ -12,27 +12,27 @@ function* getNews({id}) {
             },
         });
         yield put(newsActions.newsSuccess(data));
-    } catch(error){
-        yield put(newsActions.newsFail(error))
+    } catch (error) {
+        yield put(newsActions.newsFail(error));
     }
 };
 
-function* postNews({data}) {
-    console.log('dataPost -->', data);
-    try{
-        const data = yield call(API, '/', {
+function* addNews({ data }) {
+    const idUser = localStorage.getItem('idUser');
+    try {
+        const dataRes = yield call(API, `/news/${idUser}`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                data: data
+                data: JSON.stringify(data),
             }),
         });
-        yield put(newsActions.addNewSuccess(data))
-    }catch{
-        yield put(newsActions.addNewFail)
+        yield put(newsActions.addNewSuccess(dataRes.posts));
+    } catch {
+        yield put(newsActions.addNewFail);
     }
 
 }
@@ -40,6 +40,6 @@ function* postNews({data}) {
 export default function* newsSaga() {
     yield all([
         takeEvery('NEWS_REQUEST', getNews),
-        takeEvery('ADD_NEWS_REQUEST', postNews),
-    ])
+        takeEvery('ADD_NEWS_REQUEST', addNews),
+    ]);
 }
