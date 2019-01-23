@@ -22,15 +22,33 @@ function newsReducer(state = intialState, action) {
         case 'DELETE_NEWS': {
             return {
                 ...state,
-                news: action.payload,
+                news: action.array,
                 error: false
             }
         }
         case 'EDIT_NEWS': {
             return {
                 ...state,
-                news: action.payload,
+                news: action.array,
                 error: false
+            }
+        }
+        case 'ADD_NEWS_REQUEST': {
+            return {
+                news: [],
+                error: false
+            }
+        }
+        case 'ADD_NEWS_SUCCESS': {
+            return {
+                news: action.array,
+                error: false
+            }
+        }
+        case 'ADD_NEWS_FAIL': {
+            return {
+                news: [],
+                error: true
             }
         }
         case 'NEWS_REQUEST': {
@@ -41,14 +59,14 @@ function newsReducer(state = intialState, action) {
         }
         case 'NEWS_SUCCESS': {
             return {
-                news: action.payload,
+                news: action.array,
                 error: false
             }
         }
         case 'NEWS_FAIL': {
             return {
                 news: [],
-                error: action.error
+                error: true
             }
         }
         default:

@@ -15,7 +15,7 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <Switch>
-                    <Route path='/' exact component={News}/>
+                    <Route path='/news' exact component={News}/>
                     <Route path ='/user' component ={User} />
                     <Route path='/login' component={Login}/>
                     <Route path='/signUp' component={Registration}/>

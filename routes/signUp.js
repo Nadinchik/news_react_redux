@@ -11,7 +11,6 @@ passport.use('local-signup', new LocalStrategy({
     },
     function (req, username, password, done) {
 
-
         User.findOne({username}, function (err, user) {
             if (err) {
                 return done(err);
@@ -39,12 +38,6 @@ router.post('/',
         console.log('req.user -->', req.user);
         res.send({user: req.user});
     });
-
-// router.get('/logout',(req,res)=>{
-//   req.logout();
-//   req.flash('Logout Successfully');
-//   res.redirect('/signUp')
-// });
 
 
 // router.get('/logout',(req,res)=>{

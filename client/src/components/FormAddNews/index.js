@@ -6,18 +6,16 @@ class FormAddNews extends Component {
         this.state={
             title:'',
             text:'',
-            author:'',
-            date:0
+            author:''
         }
     }
 
     handleSubmit = () => {
-        const {title, text, author, date} = this.state;
+        const {title, text, author} = this.state;
         const {onSubmit} = this.props;
         const data={
             title,
             text,
-            date,
             author
         };
         onSubmit(data);
@@ -36,7 +34,7 @@ class FormAddNews extends Component {
 
     render() {
         const { onClose, isError} = this.props;
-        const {title, text, author, date} = this.state;
+        const {title, text, author} = this.state;
         return (
             <div className="FormAdd">
                 <form>
@@ -52,12 +50,6 @@ class FormAddNews extends Component {
                         value={text}
                         onChange={this.handleInput}
                         placeholder="Text"
-                    />
-                    <input
-                        name="date"
-                        type="datetime"
-                        value={date}
-                        placeholder="Date"
                     />
                     <input
                         name="author"

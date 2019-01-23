@@ -10,11 +10,12 @@ let db = require('./db/db');
 let model = require('./models/User_model');
 const User = require('mongoose').model('users');
 let passport = require('passport');
-let indexRouter = require('./routes/index');
+// let indexRouter = require('./routes/index');
 let userRouter = require('./routes/user');
 let signUpRouter = require('./routes/signUp');
 let loginRouter = require('./routes/login');
-let googleRouter = require('./routes/google');
+// let googleRouter = require('./routes/google');
+let postRouter = require('./routes/post');
 let session = require('express-session');
 // let MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -49,11 +50,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 // app.use('/google', googleRouter);
+app.use('/news', postRouter);
 
 
 // catch 404 and forward to error handler
@@ -75,11 +77,12 @@ app.use(function (err, req, res, next) {
 module.exports = app;
 
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 // app.use('/google', googleRouter);
+app.use('/news', postRouter);
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

@@ -9,9 +9,8 @@ export const addNewRequest = (data) => ({
     data
 });
 
-export const addNewFail = (error) => ({
+export const addNewFail = () => ({
     type: 'ADD_NEWS_FAIL',
-    error
 });
 
 export const deleteNews = (array) => ({
@@ -34,7 +33,6 @@ export const newsSuccess = (array) => ({
     array
 });
 
-export const newsFail = (error) => ({
+export const newsFail = () => ({
     type: 'NEWS_FAIL',
-    error
 });
