@@ -73,12 +73,12 @@ class Login extends Component {
     };
 
     if (this.state.redirect) {
-      return (<Redirect to={'/news'} />)
+      return (<Redirect to={'/profile'} />)
     }
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">
-          <Link to="/">Назад</Link>
+          <Link to="/news">Назад</Link>
         </div>
         <div className='formAuth mx-auto'>
           <div className='card-title'>

@@ -17,9 +17,9 @@ function* login({username, password}) {
         password: password,
       }),
     });
-    console.log('dataLogin -->', data.user);
     yield put(loginActions.loginSuccess(data.user));
     localStorage.setItem('idUser', data.user._id);
+    localStorage.setItem('isLogged', 'true');
   } catch (e) {
     yield put(loginActions.loginFail(e.statusText))
   }

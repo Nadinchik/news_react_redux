@@ -1,5 +1,8 @@
+const checkLogged = () => localStorage.getItem('isLogged');
+
 const intialState = {
   userData: {},
+  isLogged: checkLogged(),
   error: false
 };
 

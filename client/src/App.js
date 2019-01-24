@@ -9,30 +9,32 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 
 class App extends Component {
-    render() {
-        // console.log('isLogged -==> ', this.props.isLogged);
-        // const { isLogged } = this.props;
-        // if (isLogged) {
-            return (
-              <Switch>
-                  <Route path="/news" component={News} />
-                  <Route path="/user" component={User} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/signUp" component={Registration} />
-                  <Redirect to="/news" />
-              </Switch>
-            );
-        // }
-        // return (
-        //   <Switch>
-        //       <Route path="/login" component={Login} />
-        //       <Route path="/signUp" component={Registration} />
-        //       <Redirect to="/login" />
-        //   </Switch>
-        // );
+  render() {
+    console.log('isLogged -==> ', this.props.isLogged);
+    const { isLogged } = this.props;
+    if (isLogged) {
+      return (
+        <Switch>
 
+          <Route path="/news" component={News} />
+          <Route path="/user" component={User} />
+          <Route path="/login" component={Login} />
+          <Route path="/signUp" component={Registration} />
+          <Redirect to="/news" />
+        </Switch>
+      );
     }
+    return (
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signUp" component={Registration} />
+        <Redirect to="/login" />
+      </Switch>
+    );
+
+  }
 }
+
 
 const mapStateToProps = (state) => ({ isLogged: state.loginReducer.isLogged });
 

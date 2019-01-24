@@ -17,6 +17,11 @@ code {
   text-align: left;
 }
 
+ul, li{
+  text-decoration: none;
+  list-style: none;
+}
+
 .NewsList{
   display: flex;
   flex-direction: column;
@@ -44,6 +49,9 @@ code {
   height: 600px;
 }
 
+.validationForm{
+  color:red;
+}
 .card-title{
   font-size: 32px;
   font-weight: bold;
@@ -74,6 +82,7 @@ code {
   }
 }
 .addButton {
+  margin-bottom: 15px;
   color: #fff;
   padding: 5px 35px;
   background: #356197;

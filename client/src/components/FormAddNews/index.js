@@ -6,22 +6,28 @@ class FormAddNews extends Component {
         this.state = {
             title: '',
             text: '',
+            isError: true
         };
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { title, text } = this.state;
+        const { title, text, isError } = this.state;
         const { onSubmit, onClose } = this.props;
-        const data = {
-            title,
-            text,
-        };
-        onSubmit(data);
-        this.setState({
-            title: '',
-            text: '',
-        });
+        if((text.trim() || text.length >= 30) && (text.trim() || text.length >= 30)){
+            const data = {
+                title,
+                text,
+            };
+            onSubmit(data);
+            this.setState({
+                title: '',
+                text: '',
+                isError: false
+            });
+        }else {
+            this.setState({isError: true})
+        }
         onClose();
     };
 
@@ -31,8 +37,8 @@ class FormAddNews extends Component {
     };
 
     render() {
-        const { onClose, isError } = this.props;
-        const { title, text } = this.state;
+        const { onClose, isError} = this.props;
+        const { title, text} = this.state;
         return (
           <div className="FormAdd">
               <form>

@@ -23,7 +23,6 @@ const addPost = (req, res) => {
           });
       });
     }
-
     if (error) {
       res.status(500).send('Something broke!');
     }
@@ -31,27 +30,28 @@ const addPost = (req, res) => {
 };
 
 
-const getUsersPosts = (idUser, done) => {
-  Post.find({ idUser }, function (user, posts, error) {
+const getUsersPosts = (req, res) => {
+  const { idUser } = req.params;
+  Post.findbyId(idUser, function (error, posts) {
       if (user) {
-        return done(user, posts, null);
+        return res.send({posts});
       }
       if (error) {
-        return done(error);
+        res.status(500).send('Cannot get posts!');
       }
     },
   );
 };
 
-const getAllPosts = (page, done) => {
+const getAllPosts = (req, res) => {
   Post.find({})
     .limit(5)
-    .exec(function (posts, error) {
+    .exec(function (error, posts) {
       if (posts) {
-        return done(posts, null);
+        return res.status(200).send({posts})
       }
       if (error) {
-        return done(error);
+        res.status(500).send('Errors');
       }
     });
 };

@@ -38,7 +38,7 @@ app.use(passport.session());
 
 
 app.use('/', indexRouter);
-app.use('/user', userRouter);
+app.use('/profile', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/google', googleRouter);
@@ -65,7 +65,7 @@ module.exports = app;
 
 
 app.use('/', indexRouter);
-app.use('/user', userRouter);
+app.use('/profile', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/google', googleRouter);

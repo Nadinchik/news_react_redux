@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 // import SearchField from "react-search-field";
 import SearchInput from 'react-search-input';
 
@@ -28,6 +28,7 @@ class News extends Component {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
       isEdit: false,
+      isError: false
     }));
   };
 
@@ -37,8 +38,8 @@ class News extends Component {
   // };
 
   render() {
-    const { isOpen,  isError } = this.state;
-    const { addPost, posts } = this.props;
+    const {isOpen, isError} = this.state;
+    const {addPost, posts} = this.props;
     console.log('posts', posts);
     return (
       <div className="container">
@@ -47,13 +48,13 @@ class News extends Component {
             Новости
           </h1>
           <div>
-            <SearchInput className="search-input" onChange={this.searchUpdated} />
+            <SearchInput className="search-input" onChange={this.searchUpdated}/>
           </div>
           <div className="LinkGo">
             <Link to="/login">Login</Link>
           </div>
           <div className="LinkGoUser">
-            <Link to="/user">User</Link>
+            <Link to="/profile">Profile</Link>
           </div>
         </div>
 
@@ -64,7 +65,10 @@ class News extends Component {
             onClick={this.toggleModal}>
             Добавить новость
           </button>
-          <NewsList posts={posts} />
+
+          <div>
+            <NewsList posts={posts}/>
+          </div>
         </div>
 
         <ModalWindow
@@ -74,7 +78,7 @@ class News extends Component {
           <FormAddNews
             onSubmit={addPost}
             onClose={this.toggleModal}
-            iserror={isError}
+            isError={this.isError}
           />
         </ModalWindow>
       </div>
@@ -82,7 +86,7 @@ class News extends Component {
   }
 
   searchUpdated(term) {
-    this.setState({ searchTerm: term });
+    this.setState({searchTerm: term});
   }
 }
 
