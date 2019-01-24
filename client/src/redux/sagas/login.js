@@ -17,6 +17,8 @@ function* login({username, password}) {
         password: password,
       }),
     });
+    console.log('dataLogin -->', data.user);
+
     yield put(loginActions.loginSuccess(data.user));
     localStorage.setItem('idUser', data.user._id);
     localStorage.setItem('isLogged', 'true');
@@ -28,5 +30,5 @@ function* login({username, password}) {
 export default function* loginSaga() {
   yield all([
     takeLatest('LOGIN_REQUEST', login),
-  ]);
+  ])
 }

@@ -78,7 +78,7 @@ class News extends Component {
           <FormAddNews
             onSubmit={addPost}
             onClose={this.toggleModal}
-            isError={this.isError}
+            isError={isError}
           />
         </ModalWindow>
       </div>

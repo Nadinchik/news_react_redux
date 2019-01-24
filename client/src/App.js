@@ -17,7 +17,7 @@ class App extends Component {
         <Switch>
 
           <Route path="/news" component={News} />
-          <Route path="/user" component={User} />
+          <Route path="/profile" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/signUp" component={Registration} />
           <Redirect to="/news" />
@@ -34,7 +34,6 @@ class App extends Component {
 
   }
 }
-
 
 const mapStateToProps = (state) => ({ isLogged: state.loginReducer.isLogged });
 

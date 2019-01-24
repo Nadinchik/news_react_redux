@@ -4,9 +4,10 @@ import loginSaga from './login';
 import newsSaga from './news';
 
 export default function* rootSaga() {
-  yield all([
-    fork(loginSaga),
-    fork(signUpSaga),
-    fork(newsSaga),
-  ])
+
+    yield all([
+        fork(loginSaga),
+        fork(signUpSaga),
+        fork(newsSaga),
+    ])
 }

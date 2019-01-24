@@ -5,15 +5,14 @@ class FormAddNews extends Component {
         super(props);
         this.state = {
             title: '',
-            text: '',
-            isError: true
+            text: ''
         };
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { title, text, isError } = this.state;
-        const { onSubmit, onClose } = this.props;
+        const { title, text} = this.state;
+        const { onSubmit, onClose, isError } = this.props;
         if((text.trim() || text.length >= 30) && (text.trim() || text.length >= 30)){
             const data = {
                 title,

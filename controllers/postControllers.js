@@ -1,6 +1,6 @@
 const modelPost = require('../models/post_Model');
 const Post = require('mongoose').model('post');
-const model = require('../models/post_Model');
+const model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
 const addPost = (req, res) => {
@@ -43,6 +43,7 @@ const getUsersPosts = (req, res) => {
   );
 };
 
+
 const getAllPosts = (req, res) => {
   Post.find({})
     .limit(5)
@@ -61,3 +62,4 @@ module.exports = {
   getUsersPosts,
   getAllPosts,
 };
+

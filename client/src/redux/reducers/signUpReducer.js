@@ -21,7 +21,7 @@ const signUpReducer = (state = intialState, action) => {
     case 'SIGN_UP_USER_FAIL': {
       return {
         userData: {},
-        error: action.error
+        error: true
       };
     }
     default:

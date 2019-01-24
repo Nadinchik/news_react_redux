@@ -16,7 +16,7 @@ class Login extends Component {
       username: '',
       password: '',
       isLoading: false,
-      redirect: false
+      // redirect: false
     };
   }
 
@@ -72,9 +72,9 @@ class Login extends Component {
       console.log(response);
     };
 
-    if (this.state.redirect) {
-      return (<Redirect to={'/profile'} />)
-    }
+    // if (this.state.redirect) {
+    //   return (<Redirect to={'/profile'} />)
+    // }
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">

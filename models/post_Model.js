@@ -20,3 +20,4 @@ let schema = new mongoose.Schema({
 let Post = mongoose.model('post', schema);
 
 module.exports = Post;
+
