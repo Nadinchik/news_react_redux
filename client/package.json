@@ -22,6 +22,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-saga": "^0.2.6",
     "react-scripts": "^2.1.3",
+    "react-search-input": "^0.11.3",
     "reactstrap": "^7.0.2",
     "redux": "^4.0.1",
     "redux-react-session": "^2.5.0",

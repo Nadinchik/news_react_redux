@@ -1,6 +1,5 @@
 let crypto = require('crypto');
 let mongoose = require('mongoose');
-let encryptPassword = require('../utils/encryptPassword');
 
 let schema = new mongoose.Schema({
   fullName: {

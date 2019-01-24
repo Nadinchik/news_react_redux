@@ -1,19 +1,25 @@
-import React from 'react'
-import newsItem from "../../components/NewsItem";
+import React from 'react';
+import NewsItem from '../../components/NewsItem';
+import PropTypes from 'prop-types';
 
-const NewsList = (news) => (
-  <ul className="NewsList">
-    {news.map((item) => (
-      <newsItem
-        key={item.id}
-        title={item.title}
-        text={item.text}
-        date={item.date}
-        author={item.author}
-      />
-    ))
-    }
-  </ul>
-);
+
+const NewsList = ({ posts }) => {
+  return (
+    <ul className="NewsList">
+      {posts.length > 0 && posts.map((item) => (
+        <NewsItem data={item} key={item._id} />
+      ))
+      }
+    </ul>
+  );
+};
+
+NewsList.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
+};
+
+NewsList.defaultTypes = {
+  posts: [],
+};
 
 export default NewsList;

@@ -7,6 +7,7 @@ import {GoogleLogin} from 'react-google-login';
 import * as loginActions from "../../redux/actions/login";
 // import {PostData} from "../../components/services/PostData";
 
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,17 @@ class Login extends Component {
     };
   }
 
+  onSubmit = (e) => {
+    e.preventDefault();
+    const {username, password} = this.state;
+    const {login} = this.props;
+    login(username, password);
+    this.setState({
+      username:'',
+      password:''
+    })
+  };
+
   componentDidMount() {
     localStorage.getItem('idUser');
     console.log(' -->', localStorage.getItem('idUser'));
@@ -29,11 +41,10 @@ class Login extends Component {
         'Content-Type': 'application/json'
       }
     })
-       .then(result => {
-         return result.data});
-        // this.setState({ });
-      };
-
+      .then(result => {
+        return result.data});
+    // this.setState({ });
+  };
 
   // signup = (res, type) => {
   //   let postData;
@@ -54,17 +65,6 @@ class Login extends Component {
     this.setState({[name]: value});
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    const {username, password} = this.state;
-    const {login} = this.props;
-    login(username, password);
-    this.setState({
-      username: '',
-      password: ''
-    })
-  };
-
 
   render() {
     const {username, password, isLoading} = this.state;
@@ -73,7 +73,7 @@ class Login extends Component {
     };
 
     if (this.state.redirect) {
-      return (<Redirect to={'/'} />)
+      return (<Redirect to={'/news'} />)
     }
     return (
       <div className='thead-light'>

@@ -2,7 +2,7 @@ let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
-let bodyParser = require("body-parser");
+let bodyParser = require('body-parser');
 let logger = require('morgan');
 
 
@@ -15,8 +15,8 @@ let userRouter = require('./routes/user');
 let signUpRouter = require('./routes/signUp');
 let loginRouter = require('./routes/login');
 let googleRouter = require('./routes/google');
+let postRouter = require('./routes/post');
 let session = require('express-session');
-// let MongoDBStore = require('connect-mongodb-session')(session);
 
 let app = express();
 
@@ -26,23 +26,11 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: "mySecretKey"}));
-
-// app.use(session({
-//   store: new MongoDBStore({
-//     url: 'mongodb://localhost/news'
-//   }),
-//   secret: 'mySecretKey',
-//   cookie: {
-//     maxAge: 1000 * 60 * 60 * 24 * 7
-//   },
-//   resave: false,
-//   saveUninitialized: false
-// }));
+app.use(session({ secret: 'mySecretKey' }));
 
 
 app.use(passport.initialize());
@@ -54,6 +42,7 @@ app.use('/user', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/google', googleRouter);
+app.use('/news', postRouter);
 
 
 // catch 404 and forward to error handler
@@ -80,6 +69,7 @@ app.use('/user', userRouter);
 app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/google', googleRouter);
+app.use('/news', postRouter);
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

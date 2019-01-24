@@ -1,28 +1,39 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { Switch, Route } from "react-router";
-import { Provider } from "react-redux";
+import React, { Component } from 'react';
+import { Switch, Route, Redirect } from 'react-router';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import News from "./pages/News";
-import User from "./pages/User";
-import Login from "./pages/Login"
-import Registration from "./pages/Registration"
-import store from "./store"
-
+import News from './pages/News';
+import User from './pages/User';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
 
 class App extends Component {
     render() {
-        return (
-            <Provider store={store}>
-                <Switch>
-                    <Route path='/' exact component={News}/>
-                    <Route path ='/user' component ={User} />
-                    <Route path='/login' component={Login}/>
-                    <Route path='/signUp' component={Registration}/>
-                </Switch>
-            </Provider>
-        );
+        // console.log('isLogged -==> ', this.props.isLogged);
+        // const { isLogged } = this.props;
+        // if (isLogged) {
+            return (
+              <Switch>
+                  <Route path="/news" component={News} />
+                  <Route path="/user" component={User} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/signUp" component={Registration} />
+                  <Redirect to="/news" />
+              </Switch>
+            );
+        // }
+        // return (
+        //   <Switch>
+        //       <Route path="/login" component={Login} />
+        //       <Route path="/signUp" component={Registration} />
+        //       <Redirect to="/login" />
+        //   </Switch>
+        // );
+
     }
 }
 
-export default withRouter(App);
+const mapStateToProps = (state) => ({ isLogged: state.loginReducer.isLogged });
+
+export default withRouter(connect(mapStateToProps)(App));
