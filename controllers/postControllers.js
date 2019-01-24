@@ -4,7 +4,7 @@ const model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
 const addPost = (req, res) => {
-  const { idUser } = req.params;
+  const {idUser} = req.params;
   const data = JSON.parse(req.body.data);
   User.findById(idUser, function (error, user) {
     if (user) {
@@ -15,15 +15,15 @@ const addPost = (req, res) => {
       });
       newPost.save(function (err) {
         if (err) return next(err);
-        Post.find({ idUser })
+        Post.find({idUser})
           .limit(5)
           .exec(function (error, posts) {
             posts.forEach(function (item) {
-              console.log('item.data -->',item.data);
+              console.log('item.data -->', item.data);
               // item.data.username=
             });
             if (error) return next(error);
-            res.send({ posts });
+            res.send({posts});
           });
       });
     }
@@ -35,36 +35,35 @@ const addPost = (req, res) => {
 
 
 const getUsersPosts = (req, res) => {
-  console.log('req -->', req)
-  const { idUser } = req.params;
-  Post.findbyId(idUser, function (error, posts) {
-      if (user) {
+  console.log('req -->', req);
+  const {idUser} = req.params;
+  User.findbyId(idUser, function (error, user) {
+    if (user){
+      Post.find({}, function (err, posts) {
+        if (posts) {
         return res.send({posts});
       }
-      if (error) {
-        res.status(500).send('Cannot get posts!');
-      }
-    },
-  );
-};
+        if (err) {
+          return res.send(err);
+        }
+      })
+    };
 
 
-const getAllPosts = (req, res) => {
-  Post.find({})
-    .limit(5)
-    .exec(function (error, posts) {
-      if (posts) {
-        return res.status(200).send({posts})
-      }
-      if (error) {
-        res.status(500).send('Errors');
-      }
-    });
-};
+    const getAllPosts = (req, res) => {
+      Post.find({}, function (error, posts) {
+          if (posts) {
+            return res.status(200).send({posts})
+          }
+          if (error) {
+            res.status(500).send('Errors');
+          }
+        });
+    };
 
-module.exports = {
-  addPost,
-  getUsersPosts,
-  getAllPosts,
-};
+    module.exports = {
+      addPost,
+      getUsersPosts,
+      getAllPosts
+    }
 

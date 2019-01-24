@@ -22,9 +22,9 @@ export const editNews = (array) => ({
     array
 });
 
-export const newsRequest = (page) => ({
+export const newsRequest = (data) => ({
     type: 'NEWS_REQUEST',
-    page
+    data
 });
 
 export const newsSuccess = (array) => ({
@@ -36,10 +36,9 @@ export const newsFail = () => ({
     type: 'NEWS_FAIL',
 });
 
-export const getNewsByIdRequest = (idUser, page) => ({
+export const getNewsByIdRequest = (idUser) => ({
     type: 'GET_NEWS_ByID_REQUEST',
-    idUser,
-    page
+    idUser
 });
 
 export const getNewsByIdSuccess = (array) => ({

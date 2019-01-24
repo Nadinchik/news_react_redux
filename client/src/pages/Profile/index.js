@@ -17,26 +17,12 @@ class Profile extends Component {
     }
   }
 
-  // const getPostsByIdUsers = (name) => ({
-  //   type: 'authenticate',
-  //   name: name
-  // });
-
   componentDidMount() {
     console.log('this.props -->', this.props);
-    const {posts} = this.state;
-    const {getPosts} = this.props;
+    const {getPosts, posts} = this.props;
     getPosts(posts);
   }
 
-  // handleAddNews = () => {
-  //     this.props.addNews({title: this.state.title})
-  // };
-
-  // handleInput = (event) => {
-  //   const {name, value} = event.target;
-  //   this.setState(prevState => ({news: {...prevState.news, [name]: value}}));
-  // };
 
   toggleModal = () => {
     this.setState(prevState => ({
@@ -55,6 +41,7 @@ class Profile extends Component {
           <Link to="/news">Back to News page</Link>
         </div>
         <div>
+          <br/>
           <button
             className="addButton"
             onClick={this.toggleModal}>
@@ -95,7 +82,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addPost: (post) => dispatch(newsActions.addNewsRequest(post)),
-  getPosts: (posts) => dispatch(newsActions.getNewsByIdRequest(posts, 1))
+  getPosts: (posts) => dispatch(newsActions.getNewsByIdSuccess(posts))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

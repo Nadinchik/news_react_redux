@@ -1,4 +1,6 @@
 let mongoose = require('mongoose');
+let moment = require('moment');
+moment().format('LL');
 let db = require('../db/db');
 
 let schema = new mongoose.Schema({

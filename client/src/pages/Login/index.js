@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-// import {Redirect} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 
 import * as loginActions from "../../redux/actions/login";
@@ -16,8 +15,7 @@ class Login extends Component {
       data: {},
       username: '',
       password: '',
-      isLoading: false,
-      // redirect: false
+      isLoading: false
     };
   }
 
@@ -75,9 +73,6 @@ class Login extends Component {
       console.log(response);
     };
 
-    // if (this.state.redirect) {
-    //   return (<Redirect to={'/profile'} />)
-    // }
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">
