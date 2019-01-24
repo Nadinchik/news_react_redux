@@ -66,7 +66,6 @@ class FormAddNews extends Component {
                   {(isError) &&
                   <p className="validationForm">Поля не должны быть пустыми</p>
                   }
-
                   <button
                     type="button"
                     className="buttons closeBtn"

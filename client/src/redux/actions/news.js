@@ -1,35 +1,35 @@
-export const addNewSuccess = (array) => ({
+export const addNewsSuccess = (array) => ({
     type: 'ADD_NEWS_SUCCESS',
     array
 });
 
-export const addNewRequest = (data) => ({
+export const addNewsRequest = (data) => ({
     type: 'ADD_NEWS_REQUEST',
-    data,
+    data
 });
 
-export const addNewFail = () => ({
+export const addNewsFail = () => ({
     type: 'ADD_NEWS_FAIL',
 });
 
 export const deleteNews = (array) => ({
     type: 'DELETE_NEWS',
-    array,
+    array
 });
 
 export const editNews = (array) => ({
     type: 'EDIT_NEWS',
-    array,
+    array
 });
 
 export const newsRequest = (page) => ({
     type: 'NEWS_REQUEST',
-    page,
+    page
 });
 
 export const newsSuccess = (array) => ({
     type: 'NEWS_SUCCESS',
-    array,
+    array
 });
 
 export const newsFail = () => ({
@@ -39,7 +39,7 @@ export const newsFail = () => ({
 export const getNewsByIdRequest = (idUser, page) => ({
     type: 'GET_NEWS_ByID_REQUEST',
     idUser,
-    page,
+    page
 });
 
 export const getNewsByIdSuccess = (array) => ({

@@ -45,9 +45,9 @@ function* addNews({data}) {
         data: JSON.stringify(data),
       }),
     });
-    yield put(newsActions.addNewSuccess(dataRes.posts));
+    yield put(newsActions.addNewsSuccess(dataRes.posts));
   } catch(error) {
-    yield put(newsActions.addNewFail(error, 'Cannot add data'));
+    yield put(newsActions.addNewsFail(error, 'Cannot add data'));
   }
 }
 

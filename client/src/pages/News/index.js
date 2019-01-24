@@ -4,8 +4,6 @@ import {connect} from 'react-redux';
 // import SearchField from "react-search-field";
 import SearchInput from 'react-search-input';
 
-import ModalWindow from '../../components/Modal';
-import FormAddNews from '../../components/FormAddNews';
 import * as newsActions from '../../redux/actions/news';
 import NewsList from '../../components/NewsList';
 
@@ -24,24 +22,13 @@ class News extends Component {
   }
 
 
-  toggleModal = () => {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
-      isEdit: false,
-      isError: false
-    }));
-  };
-
-
-
   // handleChange = event => {
   //   const { value } = event.target;
   //   this.setState({ value });
   // };
 
   render() {
-    const {isOpen, isError} = this.state;
-    const {addPost, posts} = this.props;
+    const {posts} = this.props;
     console.log('posts', posts);
     return (
       <div className="container">
@@ -59,30 +46,10 @@ class News extends Component {
             <Link to="/profile">Profile</Link>
           </div>
         </div>
-
         <br/>
-        <div>
-          <button
-            className="addButton"
-            onClick={this.toggleModal}>
-            Добавить новость
-          </button>
-
           <div>
             <NewsList posts={posts}/>
           </div>
-        </div>
-
-        <ModalWindow
-          isOpen={isOpen}
-          handleOpen={this.toggleModal}
-        >
-          <FormAddNews
-            onSubmit={addPost}
-            onClose={this.toggleModal}
-            isError={isError}
-          />
-        </ModalWindow>
       </div>
     );
   }
@@ -92,14 +59,13 @@ class News extends Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   posts: state.newsReducer.posts,
   error: state.newsReducer.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPost: (post) => dispatch(newsActions.addNewRequest(post)),
+  getPosts: (posts) => dispatch(newsActions.newsRequest(posts))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

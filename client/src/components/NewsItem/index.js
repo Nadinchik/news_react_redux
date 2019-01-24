@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const NewsItem = ({ data: { title, text, date } }) => {
   if (!title && !text) return null;
   return (

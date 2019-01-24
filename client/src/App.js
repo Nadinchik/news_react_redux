@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import News from './pages/News';
-import User from './pages/User';
+import User from './pages/Profile';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 
@@ -19,7 +19,7 @@ class App extends Component {
           <Route path="/profile" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/signUp" component={Registration} />
-          <Redirect to="/news" />
+          <Redirect to="/profile" />
         </Switch>
       );
     }
@@ -27,7 +27,7 @@ class App extends Component {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/signUp" component={Registration} />
-        <Redirect to="/login" />
+        <Redirect to="/news" />
       </Switch>
     );
 
