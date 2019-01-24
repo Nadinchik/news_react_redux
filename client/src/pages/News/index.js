@@ -32,6 +32,8 @@ class News extends Component {
     }));
   };
 
+
+
   // handleChange = event => {
   //   const { value } = event.target;
   //   this.setState({ value });

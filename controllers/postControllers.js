@@ -18,6 +18,10 @@ const addPost = (req, res) => {
         Post.find({ idUser })
           .limit(5)
           .exec(function (error, posts) {
+            posts.forEach(function (item) {
+              console.log('item.data -->',item.data);
+              // item.data.username=
+            });
             if (error) return next(error);
             res.send({ posts });
           });
@@ -31,6 +35,7 @@ const addPost = (req, res) => {
 
 
 const getUsersPosts = (req, res) => {
+  console.log('req -->', req)
   const { idUser } = req.params;
   Post.findbyId(idUser, function (error, posts) {
       if (user) {

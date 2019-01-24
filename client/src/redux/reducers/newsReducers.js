@@ -27,6 +27,7 @@ function newsReducer(state = intialState, action) {
     }
     case 'ADD_NEWS_SUCCESS': {
       return {
+        ...state,
         posts: action.array,
         error: false,
       };
@@ -45,11 +46,31 @@ function newsReducer(state = intialState, action) {
     }
     case 'NEWS_SUCCESS': {
       return {
+        ...state,
         posts: action.array,
         error: false,
       };
     }
     case 'NEWS_FAIL': {
+      return {
+        posts: [],
+        error: true,
+      };
+    }
+    case 'GET_NEWS_ByID_REQUEST': {
+      return {
+        posts: [],
+        error: true,
+      };
+    }
+    case 'GET_NEWS_ByID_SUCCESS': {
+      return {
+        ...state,
+        posts: action.array,
+        error: true,
+      };
+    }
+    case 'GET_NEWS_ByID_FAIL': {
       return {
         posts: [],
         error: true,

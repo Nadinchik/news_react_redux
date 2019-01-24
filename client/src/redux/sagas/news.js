@@ -1,8 +1,8 @@
-import { call, put, all, takeEvery } from 'redux-saga/effects';
+import {call, put, all, takeEvery} from 'redux-saga/effects';
 import * as newsActions from '../actions/news';
 import API from '../sagas/services';
 
-function* getNews({ id }) {
+function* getUsersNews({id}) {
   try {
     const data = yield call(API, `/news/?id=${id}`, {
       method: 'GET',
@@ -11,13 +11,28 @@ function* getNews({ id }) {
         'Content-Type': 'application/json',
       },
     });
-    yield put(newsActions.newsSuccess(data));
+    yield put(newsActions.getNewsByIdSuccess(data));
   } catch (error) {
+    yield put(newsActions.getNewsByIdFail(error));
+  }
+}
+
+function* getAllNews() {
+  try {
+    const data = yield call(API, `/news/`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    yield put(newsActions.newsSuccess(data));
+  }catch (error){
     yield put(newsActions.newsFail(error));
   }
-};
+}
 
-function* addNews({ data }) {
+function* addNews({data}) {
   const idUser = localStorage.getItem('idUser');
   try {
     const dataRes = yield call(API, `/news/${idUser}`, {
@@ -31,15 +46,15 @@ function* addNews({ data }) {
       }),
     });
     yield put(newsActions.addNewSuccess(dataRes.posts));
-  } catch {
-    yield put(newsActions.addNewFail);
+  } catch(error) {
+    yield put(newsActions.addNewFail(error, 'Cannot add data'));
   }
-
 }
 
 export default function* newsSaga() {
   yield all([
-    takeEvery('NEWS_REQUEST', getNews),
+    takeEvery('NEWS_REQUEST', getAllNews),
+    takeEvery('GET_NEWS_ByID_REQUEST', getUsersNews),
     takeEvery('ADD_NEWS_REQUEST', addNews),
   ]);
 }

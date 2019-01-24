@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
+// import {Redirect} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 
 import * as loginActions from "../../redux/actions/login";
@@ -33,7 +33,7 @@ class Login extends Component {
 
   componentDidMount() {
     localStorage.getItem('idUser');
-    console.log(' -->', localStorage.getItem('idUser'));
+    console.log(' mount-->', localStorage.getItem('idUser'));
     fetch('/', {
       method: 'GET',
       headers: {
@@ -67,6 +67,8 @@ class Login extends Component {
 
 
   render() {
+    // console.log('isLoggedLogin -==> ', this.props.isLogged);
+    // const { isLogged } = this.props;
     const {username, password, isLoading} = this.state;
     const responseGoogle = (response) => {
       console.log(response);
@@ -129,6 +131,7 @@ class Login extends Component {
                 <Link to="/signUp">Sign Up</Link>
               </div>
             </form>
+            {/*{isLogged ? 'Успешно' : 'Неверно введены данные!'}*/}
           </div>
         </div>
       </div>

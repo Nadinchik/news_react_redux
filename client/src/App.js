@@ -15,7 +15,6 @@ class App extends Component {
     if (isLogged) {
       return (
         <Switch>
-
           <Route path="/news" component={News} />
           <Route path="/profile" component={User} />
           <Route path="/login" component={Login} />

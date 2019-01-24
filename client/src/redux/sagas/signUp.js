@@ -20,7 +20,7 @@ function* signUp({fullName, username, password}) {
     console.log('data -->', data);
 
     yield put(signUpActions.signUpSuccess(data.user));
-    localStorage.setItem('isLogged', 'true');
+    localStorage.setItem('isSignUp', 'true');
   } catch (e) {
     yield put(signUpActions.signUpFail(e.statusText))
   }
