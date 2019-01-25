@@ -13,9 +13,9 @@ class News extends Component {
     this.state = {
       isOpen: false,
       isError: true,
-      value: '',
     };
   }
+
 
   render() {
     const {posts} = this.props;
@@ -27,7 +27,8 @@ class News extends Component {
             Новости
           </h1>
           <div>
-            <SearchInput className="search-input" />
+           <SearchInput />
+            </div>
           </div>
           <div className="LinkGo">
             <Link to="/login">Login</Link>
@@ -35,7 +36,6 @@ class News extends Component {
           <div className="LinkGoUser">
             <Link to="/profile">Profile</Link>
           </div>
-        </div>
         <br/>
           <div>
             <NewsList posts={posts}/>
@@ -51,7 +51,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getPosts: (posts) => dispatch(newsActions.newsRequest(posts))
+  getPosts: (posts) => dispatch(newsActions.newsRequest(posts)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

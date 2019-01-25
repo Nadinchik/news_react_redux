@@ -30,6 +30,8 @@ class Login extends Component {
     })
   };
 
+
+
   componentDidMount() {
     localStorage.getItem('idUser');
     console.log(' mount-->', localStorage.getItem('idUser'));
@@ -42,21 +44,13 @@ class Login extends Component {
     })
       .then(result => {
         return result.data});
-    // this.setState({ });
   };
 
-  // signup = (res, type) => {
-  //   let postData;
-  //   if (type === 'google' && res.w3.username) {
-  //     postData = { fullName: res.w3.ig, provider: type, username: res.w3.u3, provider_id: res.EL}
-  //   }
-  //   PostData('signUp', postData).then((result) => {
-  //     let responseJson = result;
-  //     if (responseJson.data) {
-  //       sessionStorage.setItem('users', JSON.stringify(responseJson));
-  //       this.setState({redirect: true});
-  //     }
-  //   })
+
+  // onLogOut = (e) =>{
+  //   e.preventDefault();
+  //   const {logout} = this.props;
+  //   logout()
   // };
 
   handleChange = (event) => {
@@ -76,7 +70,15 @@ class Login extends Component {
     return (
       <div className='thead-light'>
         <div className="LinkGoBack">
-          <Link to="/news">Назад</Link>
+          <Link to="/news">Новости</Link>
+        </div>
+        <div className='btn-group'>
+          <button
+            className='btn-primary'
+            onClick={this.onLogOut}
+          >
+            LogOut
+          </button>
         </div>
         <div className='formAuth mx-auto'>
           <div className='card-title'>
@@ -141,6 +143,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   login: (username, password) => dispatch(loginActions.loginRequest(username, password)),
+  // logout: () => dispatch(loginActions.logOut())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

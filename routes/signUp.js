@@ -39,12 +39,4 @@ router.post('/',
     });
 
 
-// router.get('/logout',(req,res)=>{
-//   req.logout();
-//   req.flash('Logout Successfully');
-//   res.redirect('/signUp')
-// });
-
-
-
 module.exports = router;

@@ -27,6 +27,12 @@ const loginReducer = (state = intialState, action) => {
         error: action.error
       }
     }
+    // case 'LOG_OUT': {
+    //   console.log("logout action");
+    //   return {
+    //     ...state
+    //   }
+    // }
     default:
       return state;
   }

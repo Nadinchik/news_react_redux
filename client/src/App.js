@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import News from './pages/News';
 import User from './pages/Profile';
 import Login from './pages/Login';
+import LogOut from './pages/LogOut';
 import Registration from './pages/Registration';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path="/profile" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/signUp" component={Registration} />
+          <Route path="/logout" component={LogOut} />
           <Redirect to="/profile" />
         </Switch>
       );

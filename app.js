@@ -15,6 +15,7 @@ let signUpRouter = require('./routes/signUp');
 let loginRouter = require('./routes/login');
 let googleRouter = require('./routes/google');
 let postRouter = require('./routes/post');
+let logOutRouter = require('./routes/login');
 let session = require('express-session');
 // let MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -42,7 +43,7 @@ app.use('/signUp', signUpRouter);
 app.use('/login', loginRouter);
 app.use('/google', googleRouter);
 app.use('/news', postRouter);
-
+app.use('/logout', logOutRouter);
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

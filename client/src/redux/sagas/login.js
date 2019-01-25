@@ -1,4 +1,4 @@
-import { call, put, all, takeLatest } from 'redux-saga/effects';
+import { call, put, all, takeEvery } from 'redux-saga/effects';
 import * as loginActions from '../actions/login';
 import API from '../sagas/services';
 
@@ -26,8 +26,15 @@ function* login({ username, password }) {
   }
 };
 
+function* logOut() {
+  yield put(loginActions.logOut());
+  localStorage.removeItem('idUser');
+  localStorage.removeItem('isLogged');
+};
+
 export default function* loginSaga() {
   yield all([
-    takeLatest('LOGIN_REQUEST', login),
+    takeEvery('LOGIN_REQUEST', login),
+    takeEvery('LOG_OUT', logOut)
   ]);
 }

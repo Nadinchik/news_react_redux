@@ -19,7 +19,7 @@ function* getUsersNews({id}) {
 
 function* getAllNews() {
   try {
-    const data = yield call(API, `/news/`, {
+    const data = yield call(API, `/news`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -51,10 +51,12 @@ function* addNews({data}) {
   }
 }
 
+
+
 export default function* newsSaga() {
   yield all([
     takeEvery('NEWS_REQUEST', getAllNews),
     takeEvery('GET_NEWS_ByID_REQUEST', getUsersNews),
-    takeEvery('ADD_NEWS_REQUEST', addNews),
+    takeEvery('ADD_NEWS_REQUEST', addNews)
   ]);
 }

@@ -45,6 +45,21 @@ export const getNewsByIdSuccess = (array) => ({
     type: 'GET_NEWS_ByID_SUCCESS',
     array
 });
+
 export const getNewsByIdFail = () => ({
     type: 'GET_NEWS_ByID_FAIL',
 });
+//
+// export const findNewsRequest = (data) => ({
+//     type: 'FIND_NEWS_REQUEST',
+//     data
+// });
+//
+// export const findNewsSuccess = (array) => ({
+//     type: 'FIND_NEWS_SUCCESS',
+//     array
+// });
+//
+// export const findNewsfail = () => ({
+//     type: 'FIND_NEWS_FAIL',
+// });

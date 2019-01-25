@@ -37,4 +37,11 @@ router.get('/', function (req, res, next) {
   res.send({ user: req.user });
 });
 
+router.post('/logout', function(req,res){
+  req.logout();
+  res.send('Logout Successfully');
+  res.redirect('/signUp')
+});
+
+
 module.exports = router;

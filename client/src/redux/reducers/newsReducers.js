@@ -86,6 +86,30 @@ function newsReducer(state = intialState, action) {
         loading: false
       };
     }
+    // case 'FIND_NEWS_REQUEST': {
+    //   return {
+    //     ...state,
+    //     posts: [],
+    //     error: false,
+    //     loading: true
+    //   };
+    // }
+    // case 'FIND_NEWS_SUCCESS': {
+    //   return {
+    //     ...state,
+    //     posts: action.array,
+    //     error: false,
+    //     loading: false
+    //   };
+    // }
+    // case 'FIND_NEWS_FAIL': {
+    //   return {
+    //     posts: [],
+    //     error: true,
+    //     loading: false
+    //   };
+    // }
+
     default:
       return state;
   }

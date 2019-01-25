@@ -4,7 +4,8 @@ const model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
 const addPost = (req, res) => {
-  const { idUser } = req.params;
+  const { idUser } = req.params.data;
+  console.log('req.body.data -->', req.body.data);
   const data = JSON.parse(req.body.data);
   User.findById(idUser, function (error, user) {
     if (user) {
@@ -23,38 +24,65 @@ const addPost = (req, res) => {
           });
       });
     }
-
     if (error) {
       res.status(500).send('Something broke!');
     }
   });
 };
 
-
-const getUsersPosts = (idUser, done) => {
-  Post.find({ idUser }, function (user, posts, error) {
-      if (user) {
-        return done(user, posts, null);
+const getUsersPosts = (req, res) => {
+  console.log('req -->', req);
+  const {idUser} = req.query;
+  User.findById(idUser, function (error, user) {
+      if (user){
+        Post.find({}, function (error, posts) {
+          if(error) return res.send('Error!');
+          res.send({posts})
+        })
       }
       if (error) {
-        return done(error);
+        res.status(500).send('Error!');
       }
     },
   );
 };
 
-const getAllPosts = (page, done) => {
-  Post.find({})
-    .limit(5)
-    .exec(function (posts, error) {
+
+// const getUsersPosts = (idUser, done) => {
+//   Post.find({ idUser }, function (user, posts, error) {
+//       if (user) {
+//         return done(user, posts, null);
+//       }
+//       if (error) {
+//         return done(error);
+//       }
+//     },
+//   );
+// };
+
+const getAllPosts = (req, res) => {
+  Post.find({}, function (error, posts) {
       if (posts) {
-        return done(posts, null);
+        return res.send({posts});
       }
       if (error) {
-        return done(error);
+        return res.send('Error! Cannot get posts!');
       }
     });
 };
+
+// const getAllPosts = (req, res) => {
+//   Post.find({})
+//     .limit(5)
+//     .exec(function (posts, error) {
+//       if (posts) {
+//         return done(posts, null);
+//       }
+//       if (error) {
+//         return done(error);
+//       }
+//     });
+// };
 
 module.exports = {
   addPost,

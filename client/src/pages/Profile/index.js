@@ -24,7 +24,6 @@ class Profile extends Component {
     getPosts(posts);
   }
 
-
   toggleModal = () => {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
@@ -34,7 +33,7 @@ class Profile extends Component {
 
   render() {
     const {isOpen, isError} = this.state;
-    const {addPost, posts, error, loading,} = this.props;
+    const {addPost, posts, error, loading} = this.props;
 
     if (error) {
       return <div>Error! {error.message}</div>;
