@@ -27,7 +27,7 @@ passport.use('local', new LocalStrategy({
 ));
 
 router.post('/',
-  passport.authenticate('local', { failureRedirect: '/signUp' }),
+  passport.authenticate('local', { failureRedirect: '/' }),
   function (req, res) {
     res.send({ user: req.user });
   });

@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import * as newsActions from "../../redux/actions/news";
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 import ModalWindow from "../../components/Modal";
 import FormAddNews from "../../components/FormAddNews"
 import NewsList from "../../components/NewsList";
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+
 
 class Profile extends Component {
   constructor(props) {
@@ -31,10 +32,17 @@ class Profile extends Component {
     }));
   };
 
-
   render() {
     const {isOpen, isError} = this.state;
-    const {addPost, posts} = this.props;
+    const {addPost, posts, error, loading,} = this.props;
+
+    if (error) {
+      return <div>Error! {error.message}</div>;
+    }
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
     return (
       <div className="container">
         <div className="LinkGoBack">
@@ -78,6 +86,7 @@ Profile.defaultTypes = {
 const mapStateToProps = state => ({
   posts: state.newsReducer.posts,
   error: state.newsReducer.error,
+  loading: state.newsReducer.loading
 });
 
 const mapDispatchToProps = (dispatch) => ({

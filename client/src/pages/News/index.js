@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-// import SearchField from "react-search-field";
-import SearchInput from 'react-search-input';
+import SearchInput from '../../components/SearchField';
 
 import * as newsActions from '../../redux/actions/news';
 import NewsList from '../../components/NewsList';
 
-// const KEYS_TO_FILTERS = ['posts.title', 'posts.text', 'posts.author'];
 
 class News extends Component {
   constructor(props) {
@@ -15,17 +13,9 @@ class News extends Component {
     this.state = {
       isOpen: false,
       isError: true,
-      searchTerm: '',
       value: '',
     };
-    this.searchUpdated = this.searchUpdated.bind(this);
   }
-
-
-  // handleChange = event => {
-  //   const { value } = event.target;
-  //   this.setState({ value });
-  // };
 
   render() {
     const {posts} = this.props;
@@ -37,7 +27,7 @@ class News extends Component {
             Новости
           </h1>
           <div>
-            <SearchInput className="search-input" onChange={this.searchUpdated}/>
+            <SearchInput className="search-input" />
           </div>
           <div className="LinkGo">
             <Link to="/login">Login</Link>
@@ -52,10 +42,6 @@ class News extends Component {
           </div>
       </div>
     );
-  }
-
-  searchUpdated(term) {
-    this.setState({searchTerm: term});
   }
 }
 

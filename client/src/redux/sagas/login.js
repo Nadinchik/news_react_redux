@@ -1,8 +1,8 @@
-import {call, put, all, takeLatest} from 'redux-saga/effects';
-import * as loginActions from "../actions/login";
-import API from "../sagas/services";
+import { call, put, all, takeLatest } from 'redux-saga/effects';
+import * as loginActions from '../actions/login';
+import API from '../sagas/services';
 
-function* login({username, password}) {
+function* login({ username, password }) {
   console.log('usernameLogin, passwordLogin -->', username, password);
   try {
     const data = yield call(API, '/login', {
@@ -17,18 +17,17 @@ function* login({username, password}) {
         password: password,
       }),
     });
-    console.log('dataLogin -->', data.user);
 
     yield put(loginActions.loginSuccess(data.user));
     localStorage.setItem('idUser', data.user._id);
     localStorage.setItem('isLogged', 'true');
   } catch (e) {
-    yield put(loginActions.loginFail(e.statusText))
+    yield put(loginActions.loginFail(e.statusText));
   }
 };
 
 export default function* loginSaga() {
   yield all([
     takeLatest('LOGIN_REQUEST', login),
-  ])
+  ]);
 }

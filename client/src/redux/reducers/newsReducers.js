@@ -1,6 +1,7 @@
 const intialState = {
   posts: [],
   error: false,
+  loading: false
 };
 
 function newsReducer(state = intialState, action) {
@@ -23,6 +24,7 @@ function newsReducer(state = intialState, action) {
       return {
         posts: [],
         error: false,
+        loading: true
       };
     }
     case 'ADD_NEWS_SUCCESS': {
@@ -30,18 +32,21 @@ function newsReducer(state = intialState, action) {
         ...state,
         posts: action.array,
         error: false,
+        loading: false
       };
     }
     case 'ADD_NEWS_FAIL': {
       return {
         posts: [],
         error: true,
+        loading: false
       };
     }
     case 'NEWS_REQUEST': {
       return {
         posts: [],
         error: false,
+        loading: true,
       };
     }
     case 'NEWS_SUCCESS': {
@@ -49,31 +54,36 @@ function newsReducer(state = intialState, action) {
         ...state,
         posts: action.array,
         error: false,
+        loading: false
       };
     }
     case 'NEWS_FAIL': {
       return {
         posts: [],
         error: true,
+        loading: false
       };
     }
     case 'GET_NEWS_ByID_REQUEST': {
       return {
         posts: [],
-        error: true,
+        error: false,
+        loading: true
       };
     }
     case 'GET_NEWS_ByID_SUCCESS': {
       return {
         ...state,
         posts: action.array,
-        error: true,
+        error: false,
+        loading: false
       };
     }
     case 'GET_NEWS_ByID_FAIL': {
       return {
         posts: [],
         error: true,
+        loading: false
       };
     }
     default:
