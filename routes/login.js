@@ -40,7 +40,7 @@ router.get('/', function (req, res, next) {
 router.post('/logout', function(req,res){
   req.logout();
   res.send('Logout Successfully');
-  res.redirect('/signUp')
+  res.redirect('/news')
 });
 
 

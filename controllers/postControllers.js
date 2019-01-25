@@ -4,8 +4,7 @@ const model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
 const addPost = (req, res) => {
-  const { idUser } = req.params.data;
-  console.log('req.body.data -->', req.body.data);
+  const {idUser} = req.params;
   const data = JSON.parse(req.body.data);
   User.findById(idUser, function (error, user) {
     if (user) {
@@ -31,8 +30,7 @@ const addPost = (req, res) => {
 };
 
 const getUsersPosts = (req, res) => {
-  console.log('req -->', req);
-  const {idUser} = req.query;
+  const {idUser} = req.params;
   User.findById(idUser, function (error, user) {
       if (user){
         Post.find({}, function (error, posts) {

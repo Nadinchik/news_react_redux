@@ -2,15 +2,17 @@ import {call, put, all, takeEvery} from 'redux-saga/effects';
 import * as newsActions from '../actions/news';
 import API from '../sagas/services';
 
-function* getUsersNews({id}) {
+function* getUsersNews() {
+  const idUser = localStorage.getItem('idUser');
   try {
-    const data = yield call(API, `/news/?id=${id}`, {
+    const data = yield call(API, `/news/${idUser}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
     });
+    console.log('data -->', data);
     yield put(newsActions.getNewsByIdSuccess(data));
   } catch (error) {
     yield put(newsActions.getNewsByIdFail(error));

@@ -4,7 +4,7 @@ function userMiddleware () {
             console.log("Authenticated");
             return next()
         }
-        res.redirect('/')
+        res.redirect('/profile')
     }
 }
 module.exports = userMiddleware;

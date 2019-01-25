@@ -72,6 +72,7 @@ function newsReducer(state = intialState, action) {
       };
     }
     case 'GET_NEWS_ByID_SUCCESS': {
+      console.log('action.array -->', action.array);
       return {
         ...state,
         posts: action.array,
