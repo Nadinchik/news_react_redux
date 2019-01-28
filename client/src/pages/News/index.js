@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import SearchInput from '../../components/SearchField';
 
 import * as newsActions from '../../redux/actions/news';
 import NewsList from '../../components/NewsList';
-
+import MainLayout from '../../layout/mainLayout';
 
 class News extends Component {
   constructor(props) {
@@ -16,31 +15,23 @@ class News extends Component {
     };
   }
 
+  componentDidMount() {
+    const { getAllPosts, posts } = this.props;
+    getAllPosts(posts);
+  }
 
   render() {
-    const {posts} = this.props;
-    console.log('posts', posts);
+    const { posts } = this.props;
     return (
-      <div className="container">
-        <div className="">
+      <MainLayout>
+        <div className="container">
           <h1 className="display-3">
             Новости
           </h1>
-          <div>
-           <SearchInput />
-            </div>
-          </div>
-          <div className="LinkGo">
-            <Link to="/login">Login</Link>
-          </div>
-          <div className="LinkGoUser">
-            <Link to="/profile">Profile</Link>
-          </div>
-        <br/>
-          <div>
-            <NewsList posts={posts}/>
-          </div>
-      </div>
+          <SearchInput />
+        </div>
+        <NewsList posts={posts} />
+      </MainLayout>
     );
   }
 }
@@ -51,8 +42,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getPosts: (posts) => dispatch(newsActions.newsRequest(posts)),
-
+  getAllPosts: (posts) => dispatch(newsActions.getAllNewsRequest(posts)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

@@ -4,29 +4,28 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import News from './pages/News';
-import User from './pages/Profile';
+import Profile from './pages/Profile';
 import Login from './pages/Login';
-import LogOut from './pages/LogOut';
 import Registration from './pages/Registration';
+
 
 class App extends Component {
   render() {
-    console.log('isLogged -==> ', this.props.isLogged);
     const { isLogged } = this.props;
     if (isLogged) {
       return (
         <Switch>
           <Route path="/news" component={News} />
-          <Route path="/profile" component={User} />
+          <Route path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/signUp" component={Registration} />
-          <Route path="/logout" component={LogOut} />
-          <Redirect to="/profile" />
+          <Redirect to="/news" />
         </Switch>
       );
     }
     return (
       <Switch>
+        <Route path="/news" component={News} />
         <Route path="/login" component={Login} />
         <Route path="/signUp" component={Registration} />
         <Redirect to="/news" />

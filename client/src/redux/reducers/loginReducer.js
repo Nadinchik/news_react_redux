@@ -1,38 +1,61 @@
 const checkLogged = () => localStorage.getItem('isLogged');
 
-const intialState = {
+const initialState = {
   userData: {},
   isLogged: checkLogged(),
-  error: false
+  error: null,
 };
 
-const loginReducer = (state = intialState, action) => {
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'LOGIN_REQUEST': {
       return {
         userData: {},
-        error: false
+        error: null,
       };
     }
     case 'LOGIN_SUCCESS': {
-      console.log('action.data -->', action.data);
       return {
         userData: action.data,
-        error: false
+        isLogged: true,
+        error: null,
       };
     }
     case 'LOGIN_FAIL': {
       return {
         userData: {},
-        error: action.error
+        error: action.error,
+      };
+    }
+    case 'LOG_OUT_SUCCESS': {
+      return{
+        ...state,
+        error: null,
+        isLogged: false,
+        userData: {},
       }
     }
-    // case 'LOG_OUT': {
-    //   console.log("logout action");
-    //   return {
-    //     ...state
-    //   }
-    // }
+    case 'GET_USER_BY_ID_REQUEST':{
+      return{
+        ...state,
+        error: null,
+        userData: {},
+      }
+    }
+    case 'GET_USER_BY_ID_SUCCESS':{
+      return{
+        ...state,
+        error: null,
+        userData: action.data,
+      }
+    }
+    case 'GET_USER_BY_ID_FAIL':{
+      return{
+        ...state,
+        error: action.error,
+        userData: {},
+      }
+    }
     default:
       return state;
   }

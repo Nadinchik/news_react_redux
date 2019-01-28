@@ -2,66 +2,71 @@ body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  monospace;
 }
+
 .display-3 {
   display: block;
   text-align: left;
 }
 
-ul, li{
+ul, li {
   text-decoration: none;
   list-style: none;
 }
 
-.NewsList{
+.NewsList {
   display: flex;
   flex-direction: column;
 }
 
-.card{
+.card {
   margin-bottom: 20px;
 }
 
 .LinkGo,
-.LinkGoUser{
+.LinkGoUser {
   display: block;
   position: absolute;
   top: 35px;
   right: 120px;
 }
-.LinkGoUser{
+
+.LinkGoUser {
   margin-top: 20px;
 }
 
-.formAuth{
+.formAuth {
   display: flex;
   flex-direction: column;
   width: 600px;
   height: 600px;
 }
 
-.validationForm{
-  color:red;
+.validationForm {
+  color: red;
 }
-.card-title{
+
+.card-title {
   font-size: 32px;
   font-weight: bold;
 }
-.btn-group a{
+
+.btn-group a {
   margin-left: 20px;
   list-style: none;
   text-decoration: none;
 }
-.btn-group a:hover{
+
+.btn-group a:hover {
   color: #0014ad;
 }
 
@@ -81,6 +86,7 @@ ul, li{
     height: 90px;
   }
 }
+
 .addButton {
   margin-bottom: 15px;
   color: #fff;
@@ -88,7 +94,7 @@ ul, li{
   background: #356197;
 }
 
-button.closeBtn{
+button.closeBtn {
   position: absolute;
   top: 0;
   right: 0;
@@ -117,17 +123,25 @@ ul {
   margin: 0 auto;
 }
 
-.validationForm{
+.validationForm {
   display: inline-block;
   position: relative;
   float: left;
   color: red;
 }
 
-.col-lg-6{
+.col-lg-6 {
   display: flex;
   flex-direction: row;
 }
-.custom-select{
+
+.custom-select {
   width: 100px;
+}
+
+.profile-section {
+  &__username {
+    color: #7494cd;
+    font-size: 15px;
+  }
 }

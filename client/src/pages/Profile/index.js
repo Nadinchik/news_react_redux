@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
-import * as newsActions from "../../redux/actions/news";
-import {connect} from "react-redux";
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import React, { Component } from 'react';
+import * as newsActions from '../../redux/actions/news';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import ModalWindow from "../../components/Modal";
-import FormAddNews from "../../components/FormAddNews"
-import NewsList from "../../components/NewsList";
+import ModalWindow from '../../components/Modal';
+import FormAddNews from '../../components/FormAddNews';
+import NewsList from '../../components/NewsList';
+import UserSection from './UserSection';
+import MainLayout from '../../layout/mainLayout';
 
 
 class Profile extends Component {
@@ -14,63 +15,60 @@ class Profile extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      isError: true
-    }
+    };
   }
 
+
   componentDidMount() {
-    console.log('this.props -->', this.props);
-    const {getPosts, posts} = this.props;
-    getPosts(posts);
+    const { getPostsByID } = this.props;
+    const idUser = localStorage.getItem('idUser');
+    getPostsByID(idUser);
   }
 
   toggleModal = () => {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      isError: false
     }));
   };
 
+  handleDeletePost = (id) => {
+    const { onDelete } = this.props;
+    onDelete(id);
+  };
+
   render() {
-    const {isOpen, isError} = this.state;
-    const {addPost, posts, error, loading} = this.props;
+    const { isOpen, handleDeletePost } = this.state;
+    const { addPost, posts, authUser } = this.props;
 
-    if (error) {
-      return <div>Error! {error.message}</div>;
-    }
-
-    if (loading) {
-      return <div>Loading...</div>;
-    }
     return (
-      <div className="container">
-        <div className="LinkGoBack">
-          <Link to="/news">Back to News page</Link>
-        </div>
-        <div>
-          <br/>
+      <MainLayout>
+        <div className="container">
+
+          {/*<ProfileData />*/}
+          <UserSection user={authUser} />
+          <br />
           <button
             className="addButton"
             onClick={this.toggleModal}>
             Добавить новость
           </button>
-          <div>
-            <NewsList posts={posts}/>
-          </div>
-        </div>
-
-        <ModalWindow
-          isOpen={isOpen}
-          handleOpen={this.toggleModal}
-        >
-          <FormAddNews
-            onSubmit={addPost}
-            onClose={this.toggleModal}
-            isError={isError}
+          <NewsList
+            posts={posts}
+            handleDeletePost={handleDeletePost}
           />
-        </ModalWindow>
-      </div>
-    )
+
+          <ModalWindow
+            isOpen={isOpen}
+            handleOpen={this.toggleModal}
+          >
+            <FormAddNews
+              onSubmit={addPost}
+              onClose={this.toggleModal}
+            />
+          </ModalWindow>
+        </div>
+      </MainLayout>
+    );
   }
 }
 
@@ -83,14 +81,16 @@ Profile.defaultTypes = {
 };
 
 const mapStateToProps = state => ({
+  authUser: state.loginReducer.userData,
   posts: state.newsReducer.posts,
   error: state.newsReducer.error,
-  loading: state.newsReducer.loading
+  loading: state.newsReducer.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addPost: (post) => dispatch(newsActions.addNewsRequest(post)),
-  getPosts: (posts) => dispatch(newsActions.getNewsByIdSuccess(posts))
+  getPostsByID: (id) => dispatch(newsActions.getNewsByIdRequest(id)),
+  onDelete: (post) => dispatch(newsActions.deleteNewsRequest(post)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -1,14 +1,10 @@
 let express = require('express');
 let router = express.Router();
-const passport = require('passport');
-const userMiddleware = require('../middleware/user');
+let post = require('../controllers/profileControllers');
 
-passport.userMiddleware = userMiddleware;
+router.post(`/:idUser`,  post.addPost);
+router.get(`/:idUser`, post.getUserData);
+router.get(`/my/:id`, post.getUser);
 
-router.get('/',
-    passport.userMiddleware,
-    function (req, res, next) {
-        res.send({user: req.user});
-    });
 
 module.exports=router;

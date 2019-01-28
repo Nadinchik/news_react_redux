@@ -1,7 +1,9 @@
 import React from 'react';
 
-const NewsItem = ({ data: { title, text, date } }) => {
+const NewsItem = ({ data: { id, title, text, date, author }, data, handleDeletePost }) => {
+
   if (!title && !text) return null;
+
   return (
     <li>
       <div className="card">
@@ -14,7 +16,21 @@ const NewsItem = ({ data: { title, text, date } }) => {
             creation date: {date}
           </h6>
         </div>
+        <h4>@{author}</h4>
       </div>
+      <button
+        type="submit"
+        className="delPost"
+        onClick={() => handleDeletePost(id)}
+      >
+        Del
+      </button>
+      <button
+        type="submit"
+        className="editPost"
+      >
+        Edit
+      </button>
     </li>
   );
 };

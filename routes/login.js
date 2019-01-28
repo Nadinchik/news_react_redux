@@ -16,15 +16,16 @@ passport.use('local', new LocalStrategy({
         return done(err);
       }
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        return done({ status: 404, message: 'Incorrect username.' }, false, { message: 'Incorrect username.' });
       }
       if (!user.checkPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+        return done({ status: 400 }, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
     });
   },
 ));
+
 
 router.post('/',
   passport.authenticate('local', { failureRedirect: '/' }),
@@ -32,15 +33,8 @@ router.post('/',
     res.send({ user: req.user });
   });
 
-
 router.get('/', function (req, res, next) {
   res.send({ user: req.user });
-});
-
-router.post('/logout', function(req,res){
-  req.logout();
-  res.send('Logout Successfully');
-  res.redirect('/news')
 });
 
 

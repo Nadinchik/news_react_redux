@@ -6,22 +6,54 @@ const intialState = {
 
 function newsReducer(state = intialState, action) {
   switch (action.type) {
-    case 'DELETE_NEWS': {
+    case 'DELETE_NEWS_REQUEST': {
+      return {
+        ...state,
+        posts: [],
+        error: false,
+        loading: true
+      };
+    }
+    case 'DELETE_NEWS_SUCCESS': {
       return {
         ...state,
         posts: action.array,
         error: false,
       };
     }
-    case 'EDIT_NEWS': {
+    case 'DELETE_NEWS_FAIL': {
+      return {
+        posts: [],
+        error: true,
+        loading: false
+      };
+    }
+    case 'EDIT_NEWS_REQUEST': {
+      return {
+        ...state,
+        posts: [],
+        error: false,
+        loading: true
+      };
+    }
+    case 'EDIT_NEWS_SUCCESS': {
       return {
         ...state,
         posts: action.array,
         error: false,
+        loading: false
+      };
+    }
+    case 'EDIT_NEWS_FAIL': {
+      return {
+        posts: [],
+        error: true,
+        loading: false
       };
     }
     case 'ADD_NEWS_REQUEST': {
       return {
+        ...state,
         posts: [],
         error: false,
         loading: true
@@ -42,14 +74,15 @@ function newsReducer(state = intialState, action) {
         loading: false
       };
     }
-    case 'NEWS_REQUEST': {
+    case 'GET_ALL_NEWS_REQUEST': {
       return {
+        ...state,
         posts: [],
         error: false,
         loading: true,
       };
     }
-    case 'NEWS_SUCCESS': {
+    case 'GET_ALL_NEWS_SUCCESS': {
       return {
         ...state,
         posts: action.array,
@@ -57,7 +90,7 @@ function newsReducer(state = intialState, action) {
         loading: false
       };
     }
-    case 'NEWS_FAIL': {
+    case 'GET_ALL_NEWS_FAIL': {
       return {
         posts: [],
         error: true,
@@ -66,6 +99,7 @@ function newsReducer(state = intialState, action) {
     }
     case 'GET_NEWS_ByID_REQUEST': {
       return {
+        ...state,
         posts: [],
         error: false,
         loading: true
@@ -87,29 +121,29 @@ function newsReducer(state = intialState, action) {
         loading: false
       };
     }
-    // case 'FIND_NEWS_REQUEST': {
-    //   return {
-    //     ...state,
-    //     posts: [],
-    //     error: false,
-    //     loading: true
-    //   };
-    // }
-    // case 'FIND_NEWS_SUCCESS': {
-    //   return {
-    //     ...state,
-    //     posts: action.array,
-    //     error: false,
-    //     loading: false
-    //   };
-    // }
-    // case 'FIND_NEWS_FAIL': {
-    //   return {
-    //     posts: [],
-    //     error: true,
-    //     loading: false
-    //   };
-    // }
+    case 'FIND_NEWS_REQUEST': {
+      return {
+        ...state,
+        posts: [],
+        error: false,
+        loading: true
+      };
+    }
+    case 'FIND_NEWS_SUCCESS': {
+      return {
+        ...state,
+        posts: action.array,
+        error: false,
+        loading: false
+      };
+    }
+    case 'FIND_NEWS_FAIL': {
+      return {
+        posts: [],
+        error: true,
+        loading: false
+      };
+    }
 
     default:
       return state;

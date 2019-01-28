@@ -3,40 +3,15 @@ const Post = require('mongoose').model('post');
 const model = require('../models/User_model');
 const User = require('mongoose').model('users');
 
-const addPost = (req, res) => {
-  const {idUser} = req.params;
-  const data = JSON.parse(req.body.data);
-  User.findById(idUser, function (error, user) {
-    if (user) {
-      let newPost = new Post({
-        idUser,
-        title: data.title,
-        text: data.text,
-      });
-      newPost.save(function (err) {
-        if (err) return next(err);
-        Post.find({ idUser })
-          .limit(5)
-          .exec(function (error, posts) {
-            if (error) return next(error);
-            res.send({ posts });
-          });
-      });
-    }
-    if (error) {
-      res.status(500).send('Something broke!');
-    }
-  });
-};
 
 const getUsersPosts = (req, res) => {
-  const {idUser} = req.params;
+  const { idUser } = req.params;
   User.findById(idUser, function (error, user) {
-      if (user){
-        Post.find({}, function (error, posts) {
-          if(error) return res.send('Error!');
-          res.send({posts})
-        })
+      if (user) {
+        Post.find({ idUser }, function (error, posts) {
+          if (error) return res.send('Error!');
+          res.send({ posts });
+        });
       }
       if (error) {
         res.status(500).send('Error!');
@@ -46,44 +21,37 @@ const getUsersPosts = (req, res) => {
 };
 
 
-// const getUsersPosts = (idUser, done) => {
-//   Post.find({ idUser }, function (user, posts, error) {
-//       if (user) {
-//         return done(user, posts, null);
-//       }
-//       if (error) {
-//         return done(error);
-//       }
-//     },
-//   );
-// };
-
 const getAllPosts = (req, res) => {
-  Post.find({}, function (error, posts) {
-      if (posts) {
-        return res.send({posts});
-      }
-      if (error) {
-        return res.send('Error! Cannot get posts!');
-      }
+  let promise = Post.find((error, posts) => {
+    if (error) {
+      return res.send('Error! Cannot get posts!');
+    }
+    if (posts.length === 0) {
+      return res.send({ posts });
+    }
+  });
+  let dataList = [];
+  promise.then(posts => {
+    posts.forEach(async (item, index) => {
+      await User.findById(item.idUser, (err, user) => {
+        const data = {
+          _id: item._id,
+          idUser: item.idUser,
+          title: item.title,
+          text: item.text,
+          date: item.date,
+          author: user.username,
+        };
+        dataList.push(data);
+      });
+
+      return res.send({ posts: dataList });
+
     });
+  });
 };
 
-// const getAllPosts = (req, res) => {
-//   Post.find({})
-//     .limit(5)
-//     .exec(function (posts, error) {
-//       if (posts) {
-//         return done(posts, null);
-//       }
-//       if (error) {
-//         return done(error);
-//       }
-//     });
-// };
-
 module.exports = {
-  addPost,
   getUsersPosts,
   getAllPosts,
 };

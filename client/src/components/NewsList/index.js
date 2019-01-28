@@ -3,11 +3,11 @@ import NewsItem from '../../components/NewsItem';
 import PropTypes from 'prop-types';
 
 
-const NewsList = ({ posts }) => {
+const NewsList = ({ posts, handleDeletePost }) => {
   return (
     <ul className="NewsList">
       {posts.length > 0 && posts.map((item) => (
-        <NewsItem data={item} key={item._id} />
+        <NewsItem data={item} key={item._id} handleDeletePost={handleDeletePost} />
       ))
       }
     </ul>
