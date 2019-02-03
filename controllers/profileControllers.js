@@ -12,6 +12,7 @@ const addPost = (req, res) => {
         idUser,
         title: data.title,
         text: data.text,
+        tags: data.tags
       });
       newPost.save(function (err) {
         if (err) return next(err);

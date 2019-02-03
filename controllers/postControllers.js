@@ -39,14 +39,13 @@ const getAllPosts = (req, res) => {
           idUser: item.idUser,
           title: item.title,
           text: item.text,
+          tags: item.tags,
           date: item.date,
           author: user.username,
         };
         dataList.push(data);
       });
-
       return res.send({ posts: dataList });
-
     });
   });
 };

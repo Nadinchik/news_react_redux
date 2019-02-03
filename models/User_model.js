@@ -10,6 +10,9 @@ let schema = new mongoose.Schema({
     unique: true,
     require: true,
   },
+  image:{
+    type: String,
+  },
   hashedPassword: {
     type: String,
   },

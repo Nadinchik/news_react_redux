@@ -1,6 +1,5 @@
 let mongoose = require('mongoose');
 // let moment = require('moment');
-// moment().format('LL');
 let db = require('../db/db');
 
 let schema = new mongoose.Schema({
@@ -11,6 +10,12 @@ let schema = new mongoose.Schema({
     type: String,
   },
   text: {
+    type: String,
+  },
+  tags: {
+    type: Array,
+  },
+  image: {
     type: String,
   },
   date: {

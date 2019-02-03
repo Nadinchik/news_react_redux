@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class FormAddNews extends Component {
   constructor(props) {
@@ -6,39 +6,52 @@ class FormAddNews extends Component {
     this.state = {
       title: '',
       text: '',
+      tags: [],
+      tag: '',
       isError: false,
     };
   }
 
+  addTags = (e) => {
+    e.preventDefault();
+    console.log('tags -->', this.state.tags);
+    const arr = [];
+    this.setState({
+      tags: [...this.state.tags, arr]
+    })
+  };
+
   handleAddPost = (e) => {
     e.preventDefault();
-    const { title, text } = this.state;
-    const { onSubmit, onClose } = this.props;
+    const {title, text, tags} = this.state;
+    const {onSubmit, onClose} = this.props;
     if ((text.trim() || text.length >= 30) && (text.trim() || text.length >= 30)) {
       const data = {
         title,
         text,
+        tags
       };
       onSubmit(data);
       this.setState({
         title: '',
         text: '',
+        tags,
         isError: false,
       });
     } else {
-      this.setState({ isError: true });
+      this.setState({isError: true});
     }
     onClose();
   };
 
   handleInput = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    const {name, value} = event.target;
+    this.setState({[name]: value});
   };
 
   render() {
-    const { onClose } = this.props;
-    const { title, text, isError } = this.state;
+    const {onClose} = this.props;
+    const {title, text, tags, isError} = this.state;
     return (
       <div className="FormAdd">
         <form>
@@ -55,6 +68,21 @@ class FormAddNews extends Component {
             onChange={this.handleInput}
             placeholder="Text"
           />
+          <input
+            name="tags"
+            type="text"
+            value={tags}
+            className='last_elem'
+            onChange={this.handleInput}
+            placeholder="#Tags"
+          />
+          <button
+            type="submit"
+            onClick={(e)=>this.addTags(e)}
+            className='addButton'
+          >
+            +
+          </button>
           <div className="buttons">
             <button
               type="submit"

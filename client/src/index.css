@@ -70,21 +70,25 @@ ul, li {
   color: #0014ad;
 }
 
-.FormAdd {
-  input, textarea {
-    width: 100%;
-    padding: 5px 15px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+.FormAdd input,
+.FormAdd textarea {
+  width: 100%;
+  padding: 5px 15px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
 
-    &:not(:last-child) {
-      margin-bottom: 15px;
-    }
-  }
+.FormAdd input:not(:last-child),
+.FormAdd textarea:not(:last-child) {
+  margin-bottom: 15px;
+}
 
-  textarea {
-    height: 90px;
-  }
+.FormAdd textarea {
+  height: 90px;
+}
+
+.FormAdd .last_elem {
+  width: 80%;
 }
 
 .addButton {
@@ -100,10 +104,10 @@ button.closeBtn {
   right: 0;
 }
 
-button, textarea, input {
-  &:focus {
-    outline: none;
-  }
+button:focus,
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
 a, button {
@@ -139,9 +143,32 @@ ul {
   width: 100px;
 }
 
-.profile-section {
-  &__username {
-    color: #7494cd;
-    font-size: 15px;
-  }
+.profile-section__username {
+  color: #7494cd;
+  font-size: 15px;
+}
+
+.post-item {
+  margin: 20px;
+  border-bottom: 1px solid #b9c8cc;
+}
+
+.post-item div.h2 {
+  margin-left: 30px;
+}
+
+.post-item .btn-group {
+  margin-bottom: 10px;
+}
+
+.post-body {
+  padding: 10px;
+}
+
+.post-body section {
+  margin-bottom: 15px;
+}
+
+.btn-group button{
+  border-radius: 5px;
 }
