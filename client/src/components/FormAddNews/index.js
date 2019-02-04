@@ -7,7 +7,7 @@ class FormAddNews extends Component {
       title: '',
       text: '',
       tags: [],
-      tag: '',
+      array:[],
       isError: false,
     };
   }
@@ -15,9 +15,9 @@ class FormAddNews extends Component {
   addTags = (e) => {
     e.preventDefault();
     console.log('tags -->', this.state.tags);
-    const arr = [];
+    const {tags, array} = this.state;
     this.setState({
-      tags: [...this.state.tags, arr]
+     array: [array, ...tags],
     })
   };
 
@@ -35,7 +35,7 @@ class FormAddNews extends Component {
       this.setState({
         title: '',
         text: '',
-        tags,
+        tags: [],
         isError: false,
       });
     } else {
@@ -78,7 +78,7 @@ class FormAddNews extends Component {
           />
           <button
             type="submit"
-            onClick={(e)=>this.addTags(e)}
+            onClick={this.addTags}
             className='addButton'
           >
             +

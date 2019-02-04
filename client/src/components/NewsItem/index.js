@@ -13,9 +13,9 @@ const NewsItem = ({data: {id, title, text, date, author, tags}, data, handleDele
         <div className="post-body">
           <section className="h4 font-weight-normal">{text && text}</section>
           <section className="h6 font-weight-bold">#{tags && tags}</section>
-          <h8 className="">
+          <span className="">
             creation date: {date}
-          </h8>
+          </span>
         </div>
         <h4>@{author}</h4>
         <div className='btn-group'>
