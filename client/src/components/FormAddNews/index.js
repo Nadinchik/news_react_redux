@@ -7,7 +7,7 @@ class FormAddNews extends Component {
       title: '',
       text: '',
       tags: [],
-      array:[],
+      newTag: '',
       isError: false,
     };
   }
@@ -15,9 +15,11 @@ class FormAddNews extends Component {
   addTags = (e) => {
     e.preventDefault();
     console.log('tags -->', this.state.tags);
-    const {tags, array} = this.state;
+    const {newTag} = this.state;
+    let array = this.state.tags.slice();
+    array.push(newTag);
     this.setState({
-     array: [array, ...tags],
+      tags: array
     })
   };
 
@@ -49,6 +51,18 @@ class FormAddNews extends Component {
     this.setState({[name]: value});
   };
 
+ TagsList = ()=> {
+    const tags = this.state.tags;
+    const listTags = tags.map((item, index) =>
+      <li key={index}>
+        {item}
+      </li>
+    );
+    return (
+      <ul>{listTags}</ul>
+    );
+  };
+
   render() {
     const {onClose} = this.props;
     const {title, text, tags, isError} = this.state;
@@ -68,6 +82,7 @@ class FormAddNews extends Component {
             onChange={this.handleInput}
             placeholder="Text"
           />
+         <this.TagsList tags={tags}/>
           <input
             name="tags"
             type="text"
@@ -79,7 +94,7 @@ class FormAddNews extends Component {
           <button
             type="submit"
             onClick={this.addTags}
-            className='addButton'
+            className='addTags'
           >
             +
           </button>
@@ -107,5 +122,6 @@ class FormAddNews extends Component {
     );
   }
 }
+
 
 export default FormAddNews;

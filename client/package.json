@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
-    "connect-mongodb-session": "^2.0.7",
+    "connect-mongodb-session": "^2.0.8",
     "crypto": "^1.0.1",
     "fetch": "^1.1.0",
     "lodash": "^4.17.11",
@@ -51,7 +51,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.7",
-    "webpack": "^4.29.0"
+    "redux-devtools-extension": "^2.13.8"
   }
 }
