@@ -19,7 +19,8 @@ class FormAddNews extends Component {
     let array = this.state.tags.slice();
     array.push(newTag);
     this.setState({
-      tags: array
+      tags: array,
+      newTag:''
     })
   };
 
@@ -33,6 +34,7 @@ class FormAddNews extends Component {
         text,
         tags
       };
+      console.log('onSubmit', onSubmit(data));
       onSubmit(data);
       this.setState({
         title: '',
@@ -47,25 +49,22 @@ class FormAddNews extends Component {
   };
 
   handleInput = (event) => {
+    console.log('event.target.value', event.target.value);
     const {name, value} = event.target;
     this.setState({[name]: value});
   };
 
- TagsList = ()=> {
-    const tags = this.state.tags;
-    const listTags = tags.map((item, index) =>
-      <li key={index}>
-        {item}
-      </li>
-    );
-    return (
-      <ul>{listTags}</ul>
-    );
-  };
 
   render() {
     const {onClose} = this.props;
-    const {title, text, tags, isError} = this.state;
+    const {title, text, tags, newTag, isError} = this.state;
+
+    console.log('tags', tags);
+
+    const listTags = tags.length > 0 ? tags.map((item, index) => {
+      return <li key={index}>{item}</li>
+    }) : <span/>;
+
     return (
       <div className="FormAdd">
         <form>
@@ -82,11 +81,13 @@ class FormAddNews extends Component {
             onChange={this.handleInput}
             placeholder="Text"
           />
-         <this.TagsList tags={tags}/>
+
+          <ul>{listTags}</ul>
+
           <input
-            name="tags"
+            name="newTag"
             type="text"
-            value={tags}
+            value={newTag}
             className='last_elem'
             onChange={this.handleInput}
             placeholder="#Tags"
